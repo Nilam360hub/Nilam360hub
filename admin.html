@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Nilam360 — நிர்வாகி / Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#123a63;--navy-deep:#0a2542;--green:#3f9142;--green-light:#7cc242;--amber:#f0a323;--paper:#f4f7fa;--ink:#15212f;--line:rgba(18,58,99,.14);--red:#a1442b;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Noto Sans Tamil','Inter',sans-serif;font-size:14.5px;line-height:1.5;}
+  .hidden{display:none !important;}
+  button{font-family:inherit;cursor:pointer;}
+  .btn{border:0;border-radius:8px;padding:9px 16px;font-weight:600;font-size:14px;background:var(--navy);color:#fff;}
+  .btn.green{background:var(--green);} .btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line);} .btn.red{background:var(--red);}
+  .btn:disabled{opacity:.55;cursor:default;}
+  input,select,textarea{font-family:inherit;font-size:14px;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;color:var(--ink);width:100%;}
+
+  /* login */
+  #loginView{min-height:100vh;display:grid;place-items:center;background:linear-gradient(155deg,var(--navy-deep),var(--navy) 62%,#1a5c3f);padding:20px;}
+  .login-card{background:#fff;border-radius:16px;padding:34px 30px;width:100%;max-width:400px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);}
+  .login-card img{height:64px;margin:0 auto 10px;display:block;}
+  .login-card h1{margin:0 0 4px;font-size:21px;text-align:center;color:var(--navy);}
+  .login-card p.sub{margin:0 0 22px;text-align:center;color:#5c6773;font-size:13px;}
+  .login-card label{display:block;font-size:12.5px;font-weight:600;margin:14px 0 6px;color:#3a4451;}
+  .login-card .btn{width:100%;margin-top:20px;padding:12px;}
+  .msg{margin-top:14px;font-size:13.5px;} .msg.err{color:var(--red);} .msg.ok{color:var(--green);}
+  .back{display:block;text-align:center;margin-top:18px;font-size:13px;color:#5c6773;text-decoration:none;}
+
+  /* app */
+  .topbar{background:var(--navy-deep);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 22px;gap:14px;position:sticky;top:0;z-index:20;}
+  .topbar .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
+  .topbar .brand img{height:36px;background:#fff;border-radius:6px;padding:2px;}
+  .topbar .brand b{color:var(--green-light);} .topbar small{opacity:.7;font-weight:400;}
+  .topbar .who{display:flex;align-items:center;gap:12px;font-size:13px;}
+  .layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 56px);}
+  .side{background:#fff;border-right:1px solid var(--line);padding:14px 10px;}
+  .side button{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;border:0;background:none;padding:10px 12px;border-radius:8px;font-size:14px;color:var(--ink);}
+  .side button:hover{background:var(--paper);} .side button.on{background:var(--navy);color:#fff;font-weight:600;}
+  .side .pill{background:var(--amber);color:#3b2600;border-radius:99px;font-size:11px;font-weight:700;padding:1px 8px;}
+  .side hr{border:0;border-top:1px solid var(--line);margin:10px 4px;}
+  .gov-links{background:#fff;border-right:1px solid var(--line);padding:4px 10px 16px;}
+  .gov-links h5{margin:6px 12px 8px;font-size:11px;letter-spacing:.04em;color:#8a94a1;text-transform:uppercase;}
+  .gov-links a{display:flex;align-items:center;gap:8px;text-decoration:none;padding:8px 12px;border-radius:8px;font-size:13px;color:#3a4451;}
+  .gov-links a:hover{background:var(--paper);color:var(--navy);}
+  .gov-links a svg{width:14px;height:14px;flex-shrink:0;color:#8a94a1;}
+  @media (max-width:820px){.gov-links{display:none;}}
+  main{padding:22px;min-width:0;}
+  .bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;}
+  .bar h2{margin:0 auto 0 0;font-size:20px;color:var(--navy);} .bar input{max-width:260px;} .bar select{max-width:190px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;cursor:pointer;}
+  .card .num{font-size:30px;font-weight:700;color:var(--navy);} .card .lbl{font-size:12.5px;color:#5c6773;}
+  .card.hot .num{color:var(--green);}
+  .tablewrap{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:auto;}
+  table{border-collapse:collapse;width:100%;min-width:700px;}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis;}
+  th{background:#eef3f6;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:#3a4451;position:sticky;top:0;}
+  tbody tr{cursor:pointer;} tbody tr:hover{background:#f3f8f4;}
+  .tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;background:#e8eef4;color:var(--navy);}
+  .tag.good{background:#e3f3e4;color:#2a6b2d;} .tag.warn{background:#fdf0d5;color:#8a5a00;} .tag.bad{background:#f8e2dc;color:var(--red);}
+  .pager{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:12px;font-size:13px;color:#5c6773;}
+  .empty{padding:40px;text-align:center;color:#5c6773;}
+
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(10,37,66,.55);display:flex;justify-content:flex-end;z-index:50;}
+  .panel{background:#fff;width:min(620px,100%);height:100%;overflow:auto;padding:22px;}
+  .panel h3{margin:0 0 4px;color:var(--navy);} .panel .hint{font-size:12.5px;color:#5c6773;margin-bottom:14px;}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} .fgrid .full{grid-column:1/-1;}
+  .fgrid label{display:block;font-size:11.5px;font-weight:600;color:#3a4451;margin-bottom:4px;word-break:break-all;}
+  .fgrid label i{color:var(--red);font-style:normal;}
+  .fgrid input[readonly]{background:#f1f4f7;color:#5c6773;}
+  .actions{position:sticky;bottom:-22px;background:#fff;padding:14px 0 6px;margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy-deep);color:#fff;padding:11px 20px;border-radius:9px;z-index:99;font-size:14px;max-width:90%;}
+  .toast.err{background:var(--red);}
+
+  /* bulk plot add */
+  .panel.wide{width:min(900px,100%);}
+  .bulk-step{border-top:1px solid var(--line);margin-top:16px;padding-top:14px;}
+  .bulk-step h4{margin:0 0 6px;font-size:14px;color:var(--navy);}
+  .bulk-textarea{width:100%;box-sizing:border-box;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.5;padding:10px;border:1px solid var(--line);border-radius:8px;resize:vertical;}
+  .bulk-preview-wrap{margin-top:10px;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:8px;}
+  .bulk-preview-wrap table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .bulk-preview-wrap th, .bulk-preview-wrap td{padding:6px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .bulk-preview-wrap th{background:var(--paper);position:sticky;top:0;}
+  .bulk-count{font-size:13px;font-weight:600;color:var(--navy);margin-top:8px;}
+  .bulk-count.warn{color:var(--red);}
+  @media (max-width:820px){.layout{grid-template-columns:1fr;} .side{display:flex;overflow-x:auto;gap:4px;padding:8px;border-right:0;border-bottom:1px solid var(--line);} .side button{white-space:nowrap;width:auto;gap:8px;} .side hr{display:none;} .fgrid{grid-template-columns:1fr;} .topbar small{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="loginView">
+  <form class="login-card" id="loginForm">
+    <img src="logo.png" alt="Nilam360">
+    <h1>நிர்வாகி உள்நுழைவு</h1>
+    <p class="sub">Nilam360 Admin — அங்கீகரிக்கப்பட்டவர்களுக்கு மட்டும்</p>
+    <label for="em">மின்னஞ்சல் / Email</label>
+    <input id="em" type="email" required autocomplete="username">
+    <label for="pw">கடவுச்சொல் / Password</label>
+    <input id="pw" type="password" required autocomplete="current-password">
+    <button class="btn" id="loginBtn" type="submit">உள்நுழை</button>
+    <p class="msg" id="loginMsg" role="alert"></p>
+    <a class="back" href="index.html">&larr; இணையதளத்திற்கு திரும்ப</a>
+  </form>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="appView" class="hidden">
+  <div class="topbar">
+    <div class="brand"><img src="logo.png" alt=""><span>Nilam<b>360</b> <small>Admin</small></span></div>
+    <div class="who"><span id="whoEmail"></span><button class="btn ghost" id="logoutBtn">வெளியேறு</button></div>
+  </div>
+  <div class="layout">
+    <div>
+      <nav class="side" id="side"></nav>
+      <div class="gov-links">
+        <h5>ஆவணம் சரிபார்க்க (அரசு தளங்கள்)</h5>
+        <a href="https://eservices.tn.gov.in/eservicesnew/land/areg.html?lan=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg> e-Register (Adangal)</a>
+        <a href="https://eservices.tn.gov.in/eservicesnew/land/chitta.html?lan=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg> பட்டா (Patta)</a>
+        <a href="https://eservices.tn.gov.in/eservicesnew/land/chitta.html?lan=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg> சிட்டா (Chitta)</a>
+        <a href="https://eservices.tn.gov.in/eservicesnew/land/chitta.html?lan=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg> FMB / TSLR</a>
+        <a href="https://tnreginet.gov.in/portal/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg> View EC</a>
+        <a href="https://tnreginet.gov.in/portal/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg> வழிகாட்டு மதிப்பு</a>
+      </div>
+    </div>
+    <main id="main"></main>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+(function () {
+  var CFG = window.NILAM_CONFIG || {};
+  var META = {"brokers": [{"n": "broker_id", "t": "text", "pk": 1}, {"n": "full_name", "t": "text", "req": 1}, {"n": "business_agency", "t": "text"}, {"n": "mobile", "t": "text", "req": 1}, {"n": "whatsapp", "t": "text"}, {"n": "email", "t": "text"}, {"n": "address", "t": "area"}, {"n": "area", "t": "text"}, {"n": "villages_covered", "t": "text"}, {"n": "experience_years", "t": "num"}, {"n": "property_specialization", "t": "text"}, {"n": "pan", "t": "text"}, {"n": "gst", "t": "text"}, {"n": "rera_no", "t": "text"}, {"n": "kyc_status", "t": "enum", "e": ["Pending Verification", "Submitted", "Verified", "Rejected", "Expired"]}, {"n": "agreement_status", "t": "enum", "e": ["Not Signed", "Draft Sent", "Signed", "Expired"]}, {"n": "bank_verified", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "reference_check", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "properties_submitted", "t": "num"}, {"n": "verified_properties", "t": "num"}, {"n": "buyer_leads", "t": "num"}, {"n": "transactions_count", "t": "num"}, {"n": "commission_paid", "t": "num"}, {"n": "performance_score", "t": "num"}, {"n": "status", "t": "enum", "e": ["Active", "Inactive", "Suspended", "Blacklisted", "Pending Approval"]}, {"n": "joined_date", "t": "date"}, {"n": "last_contact", "t": "date"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "owners": [{"n": "owner_id", "t": "text", "pk": 1}, {"n": "owner_entity_name", "t": "text", "req": 1}, {"n": "owner_type", "t": "text"}, {"n": "mobile", "t": "text"}, {"n": "whatsapp", "t": "text"}, {"n": "email", "t": "text"}, {"n": "address", "t": "area"}, {"n": "village", "t": "text"}, {"n": "taluk", "t": "text"}, {"n": "district", "t": "text"}, {"n": "pan_id_ref", "t": "text"}, {"n": "kyc_status", "t": "enum", "e": ["Pending Verification", "Submitted", "Verified", "Rejected", "Expired"]}, {"n": "preferred_contact", "t": "text"}, {"n": "consent_to_market", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "properties_count", "t": "num"}, {"n": "status", "t": "text"}, {"n": "created_date", "t": "date"}, {"n": "last_verified", "t": "date"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "properties": [{"n": "property_id", "t": "text", "pk": 1}, {"n": "district", "t": "text"}, {"n": "taluk", "t": "text"}, {"n": "village", "t": "text"}, {"n": "location_landmark", "t": "text"}, {"n": "survey_no", "t": "text"}, {"n": "subdivision", "t": "text"}, {"n": "extent", "t": "num"}, {"n": "extent_unit", "t": "enum", "e": ["Cent", "Acre", "Ground", "Sq.ft", "Sq.yard", "Hectare"]}, {"n": "property_type", "t": "enum", "e": ["Agricultural", "Residential", "Commercial", "Industrial", "Mixed Use", "Plot / Layout", "Farm Land", "Beach / Resort", "Other"]}, {"n": "land_type", "t": "enum", "e": ["Dry Land", "Wet Land", "Government Land", "Assigned Land", "Natham"]}, {"n": "layout_name", "t": "text"}, {"n": "layout_amenities", "t": "arr"}, {"n": "highlight_icon", "t": "enum", "e": ["🔥 Hot Deal", "⭐ Featured", "🆕 New", "💰 Best Price", "⚡ Urgent Sale", "👑 Premium"]}, {"n": "owner_id", "t": "text"}, {"n": "asking_price", "t": "num"}, {"n": "market_estimate", "t": "num"}, {"n": "road_width", "t": "num"}, {"n": "road_access", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "gps_latitude", "t": "num"}, {"n": "gps_longitude", "t": "num"}, {"n": "location_public", "t": "enum", "e": ["No", "Yes"], "hint": "Yes எனில் மட்டுமே இந்த சொத்தின் சரியான Google Maps லொகேஷன் பொதுமக்களுக்கு வெளிப்படும். இல்லையெனில் 'எனக்கு அருகில்' தேடலில் தூரம் (km) மட்டும் காட்டப்படும், சரியான இருப்பிடம் மறைக்கப்பட்டிருக்கும் — இது தரகர்/நிறுவனம் இல்லாமல் நேரடி டீல் ஆவதைத் தடுக்கும்."}, {"n": "patta_status", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "ec_status", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "parent_docs_status", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "litigation_flag", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "approval_status", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "field_verification", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "legal_review", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "valuation_status", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "property_score", "t": "num"}, {"n": "property_status", "t": "enum", "e": ["Draft", "Listed", "Under Verification", "Investment Ready", "Reserved", "Under Negotiation", "Sold", "Archived", "Withdrawn", "Litigation Hold", "Not for Sale", "On Hold"]}, {"n": "source", "t": "enum", "e": ["Broker Referral", "Field Visit", "Website", "WhatsApp", "Walk-in", "Cold Call", "Social Media", "Existing Client Referral", "Other"]}, {"n": "created_date", "t": "date"}, {"n": "last_verified", "t": "date"}, {"n": "last_updated_by", "t": "text"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "property_brokers": [{"n": "link_id", "t": "text", "pk": 1}, {"n": "property_id", "t": "text"}, {"n": "broker_id", "t": "text"}, {"n": "broker_role", "t": "enum", "e": ["Primary", "Co-Broker", "Referral", "Sub-Broker"]}, {"n": "submission_date", "t": "date"}, {"n": "owner_contacted", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "evidence_source", "t": "enum", "e": ["Broker Referral", "Field Visit", "Website", "WhatsApp", "Walk-in", "Cold Call", "Social Media", "Existing Client Referral", "Other"]}, {"n": "lead_ownership_status", "t": "text"}, {"n": "commission_role", "t": "text"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}], "buyers": [{"n": "buyer_id", "t": "text", "pk": 1}, {"n": "full_name_entity", "t": "text", "req": 1}, {"n": "mobile", "t": "text"}, {"n": "whatsapp", "t": "text"}, {"n": "email", "t": "text"}, {"n": "city", "t": "text"}, {"n": "preferred_district", "t": "text"}, {"n": "preferred_taluk", "t": "text"}, {"n": "preferred_villages", "t": "text"}, {"n": "budget_min", "t": "num"}, {"n": "budget_max", "t": "num"}, {"n": "property_type", "t": "enum", "e": ["Agricultural", "Residential", "Commercial", "Industrial", "Mixed Use", "Plot / Layout", "Farm Land", "Beach / Resort", "Other"]}, {"n": "min_extent", "t": "num"}, {"n": "max_extent", "t": "num"}, {"n": "extent_unit", "t": "enum", "e": ["Cent", "Acre", "Ground", "Sq.ft", "Sq.yard", "Hectare"]}, {"n": "purpose", "t": "enum", "e": ["Own Use", "Investment", "Resale", "Agriculture", "Construction", "Other"]}, {"n": "road_requirement", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "funding_status", "t": "enum", "e": ["Pending", "Part Paid", "Paid", "On Hold"]}, {"n": "purchase_timeline", "t": "text"}, {"n": "source", "t": "enum", "e": ["Broker Referral", "Field Visit", "Website", "WhatsApp", "Walk-in", "Cold Call", "Social Media", "Existing Client Referral", "Other"]}, {"n": "lead_status", "t": "enum", "e": ["Raw", "Contacted", "Qualified", "Hot", "Warm", "Cold", "Interested", "Site Visit", "Negotiation", "Converted", "Lost", "Inactive"]}, {"n": "lead_owner_staff", "t": "text"}, {"n": "created_date", "t": "date"}, {"n": "last_contact", "t": "date"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "investors": [{"n": "investor_id", "t": "text", "pk": 1}, {"n": "name_entity", "t": "text", "req": 1}, {"n": "mobile", "t": "text"}, {"n": "whatsapp", "t": "text"}, {"n": "email", "t": "text"}, {"n": "city", "t": "text"}, {"n": "preferred_district", "t": "text"}, {"n": "preferred_taluk", "t": "text"}, {"n": "preferred_area", "t": "text"}, {"n": "investment_min", "t": "num"}, {"n": "investment_max", "t": "num"}, {"n": "preferred_property_type", "t": "enum", "e": ["Agricultural", "Residential", "Commercial", "Industrial", "Mixed Use", "Plot / Layout", "Farm Land", "Beach / Resort", "Other"]}, {"n": "min_extent", "t": "num"}, {"n": "max_extent", "t": "num"}, {"n": "extent_unit", "t": "enum", "e": ["Cent", "Acre", "Ground", "Sq.ft", "Sq.yard", "Hectare"]}, {"n": "purpose", "t": "enum", "e": ["Own Use", "Investment", "Resale", "Agriculture", "Construction", "Other"]}, {"n": "investment_horizon", "t": "text"}, {"n": "risk_preference", "t": "enum", "e": ["High", "Medium", "Low"]}, {"n": "funding_readiness", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "source", "t": "enum", "e": ["Broker Referral", "Field Visit", "Website", "WhatsApp", "Walk-in", "Cold Call", "Social Media", "Existing Client Referral", "Other"]}, {"n": "status", "t": "enum", "e": ["Raw", "Contacted", "Qualified", "Hot", "Warm", "Cold", "Interested", "Site Visit", "Negotiation", "Converted", "Lost", "Inactive"]}, {"n": "relationship_owner", "t": "text"}, {"n": "created_date", "t": "date"}, {"n": "last_contact", "t": "date"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "requirements": [{"n": "requirement_id", "t": "text", "pk": 1}, {"n": "requirement_type", "t": "enum", "e": ["Buyer", "Investor"], "req": 1}, {"n": "person_entity_id", "t": "text", "req": 1}, {"n": "preferred_district", "t": "text"}, {"n": "preferred_taluk", "t": "text"}, {"n": "preferred_villages", "t": "text"}, {"n": "budget_min", "t": "num"}, {"n": "budget_max", "t": "num"}, {"n": "property_type", "t": "enum", "e": ["Agricultural", "Residential", "Commercial", "Industrial", "Mixed Use", "Plot / Layout", "Farm Land", "Beach / Resort", "Other"]}, {"n": "min_extent", "t": "num"}, {"n": "max_extent", "t": "num"}, {"n": "extent_unit", "t": "enum", "e": ["Cent", "Acre", "Ground", "Sq.ft", "Sq.yard", "Hectare"]}, {"n": "purpose", "t": "enum", "e": ["Own Use", "Investment", "Resale", "Agriculture", "Construction", "Other"]}, {"n": "road_requirement", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "timeline", "t": "text"}, {"n": "funding_readiness", "t": "enum", "e": ["Yes", "No", "Not Available"]}, {"n": "priority", "t": "enum", "e": ["High", "Medium", "Low"]}, {"n": "status", "t": "enum", "e": ["Raw", "Contacted", "Qualified", "Hot", "Warm", "Cold", "Interested", "Site Visit", "Negotiation", "Converted", "Lost", "Inactive"]}, {"n": "created_date", "t": "date"}, {"n": "last_updated", "t": "date"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "documents": [{"n": "document_id", "t": "text", "pk": 1}, {"n": "property_id", "t": "text"}, {"n": "owner_id", "t": "text"}, {"n": "document_type", "t": "enum", "e": ["Patta", "FMB Sketch", "EC (Encumbrance Certificate)", "Sale Deed", "Parent Document", "Approved Layout", "Tax Receipt", "Legal Opinion", "Power of Attorney", "Death Certificate", "Partition Deed", "Court Order", "Other"]}, {"n": "document_number", "t": "text"}, {"n": "document_date", "t": "date"}, {"n": "received_date", "t": "date"}, {"n": "file_link_folder", "t": "text"}, {"n": "verification_status", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "verified_by", "t": "text"}, {"n": "verification_date", "t": "date"}, {"n": "confidentiality", "t": "text"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}], "verification_log": [{"n": "verification_id", "t": "text", "pk": 1}, {"n": "property_id", "t": "text"}, {"n": "document_id", "t": "text"}, {"n": "verification_type", "t": "text"}, {"n": "stage", "t": "text"}, {"n": "status", "t": "enum", "e": ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"]}, {"n": "verified_by", "t": "text"}, {"n": "verification_date", "t": "date"}, {"n": "evidence_file_link", "t": "text"}, {"n": "remarks", "t": "text"}, {"n": "next_action", "t": "text"}, {"n": "next_review_date", "t": "date"}, {"n": "created_at", "t": "ts", "ro": 1}], "matching": [{"n": "match_id", "t": "text", "pk": 1}, {"n": "property_id", "t": "text"}, {"n": "requirement_id", "t": "text"}, {"n": "person_entity_id", "t": "text"}, {"n": "person_type", "t": "enum", "e": ["Buyer", "Investor"]}, {"n": "match_score", "t": "num"}, {"n": "match_reason", "t": "text"}, {"n": "status", "t": "enum", "e": ["New", "Contacted", "Interested", "Site Visit", "Negotiation", "Rejected", "Closed", "Lost"]}, {"n": "first_contact_date", "t": "date"}, {"n": "last_contact_date", "t": "date"}, {"n": "site_visit_date", "t": "date"}, {"n": "negotiation_status", "t": "text"}, {"n": "outcome", "t": "text"}, {"n": "assigned_to", "t": "text"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "activity_log": [{"n": "activity_id", "t": "text", "pk": 1}, {"n": "activity_date", "t": "date"}, {"n": "person_entity_id", "t": "text"}, {"n": "person_type", "t": "text"}, {"n": "property_id", "t": "text"}, {"n": "requirement_id", "t": "text"}, {"n": "activity_type", "t": "enum", "e": ["Call", "WhatsApp", "Meeting", "Site Visit", "Email", "Follow-up", "Document Collection", "Negotiation", "Registration", "Other"]}, {"n": "staff_broker_id", "t": "text"}, {"n": "outcome", "t": "text"}, {"n": "next_followup", "t": "date"}, {"n": "priority", "t": "enum", "e": ["High", "Medium", "Low"]}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}], "transactions": [{"n": "transaction_id", "t": "text", "pk": 1}, {"n": "property_id", "t": "text"}, {"n": "owner_id", "t": "text"}, {"n": "buyer_id", "t": "text"}, {"n": "investor_id", "t": "text"}, {"n": "transaction_type", "t": "enum", "e": ["Sale", "Resale", "Lease", "Joint Venture", "Exchange"]}, {"n": "transaction_value", "t": "num"}, {"n": "gross_brokerage", "t": "num"}, {"n": "company_share", "t": "num"}, {"n": "broker_share", "t": "num"}, {"n": "agreement_date", "t": "date"}, {"n": "registration_date", "t": "date"}, {"n": "payment_status", "t": "enum", "e": ["Pending", "Part Paid", "Paid", "On Hold"]}, {"n": "transaction_status", "t": "enum", "e": ["Open", "Agreement Stage", "Registration Stage", "Closed", "Cancelled", "Disputed"]}, {"n": "cancellation_dispute_reason", "t": "text"}, {"n": "created_date", "t": "date"}, {"n": "closed_date", "t": "date"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}], "commission_log": [{"n": "commission_id", "t": "text", "pk": 1}, {"n": "transaction_id", "t": "text"}, {"n": "broker_id", "t": "text"}, {"n": "broker_role", "t": "enum", "e": ["Primary", "Co-Broker", "Referral", "Sub-Broker"]}, {"n": "gross_brokerage", "t": "num"}, {"n": "broker_share", "t": "num"}, {"n": "company_share", "t": "num"}, {"n": "gst_tax_notes", "t": "text"}, {"n": "payment_trigger", "t": "text"}, {"n": "eligible_date", "t": "date"}, {"n": "paid_date", "t": "date"}, {"n": "payment_status", "t": "enum", "e": ["Pending", "Part Paid", "Paid", "On Hold"]}, {"n": "approved_by", "t": "text"}, {"n": "notes", "t": "area"}, {"n": "created_at", "t": "ts", "ro": 1}], "website_enquiries": [{"n": "id", "t": "num", "pk": 1}, {"n": "submitted_at", "t": "ts"}, {"n": "name", "t": "text", "req": 1}, {"n": "mobile", "t": "text", "req": 1}, {"n": "location", "t": "text"}, {"n": "property_type", "t": "text"}, {"n": "budget", "t": "text"}, {"n": "requirement_type", "t": "text"}, {"n": "message", "t": "area"}, {"n": "source", "t": "text"}, {"n": "status", "t": "text"}, {"n": "converted_to_id", "t": "text"}], "layout_projects": [{"n": "layout_name", "t": "text", "pk": 1, "req": 1, "hint": "பிளாட் பதிவுகளில் பயன்படுத்திய அதே Layout பெயரை சரியாக டைப் செய்யவும் — இதன் மூலமாதான் வெப்சைட்டில் அவை ஒன்றாக சேர்க்கப்படும்."}, {"n": "highlight_icon", "t": "enum", "e": ["🔥 Hot Deal", "⭐ Featured", "🆕 New", "💰 Best Price", "⚡ Urgent Sale", "👑 Premium"]}, {"n": "created_at", "t": "ts", "ro": 1}, {"n": "updated_at", "t": "ts", "ro": 1}]};
+
+  // enquiries table isn't fully described in schema.sql (columns added later) — describe it here
+  META.website_enquiries = [
+    { n: 'id', t: 'num', pk: 1, ro: 1 }, { n: 'submitted_at', t: 'ts', ro: 1 },
+    { n: 'requirement_type', t: 'enum', e: ['Buyer', 'Seller', 'Investor', 'Broker', 'Bulk', 'LayoutPromoter', 'Other'] },
+    { n: 'status', t: 'enum', e: ['New', 'Reviewed', 'Converted', 'Spam'] },
+    { n: 'name', t: 'text' }, { n: 'mobile', t: 'text' }, { n: 'email', t: 'text' },
+    { n: 'district', t: 'text' }, { n: 'taluk', t: 'text' }, { n: 'village', t: 'text' }, { n: 'survey_no', t: 'text' },
+    { n: 'extent', t: 'num' }, { n: 'extent_unit', t: 'text' }, { n: 'asking_price', t: 'num' },
+    { n: 'property_type', t: 'text' }, { n: 'budget_min', t: 'num' }, { n: 'budget_max', t: 'num' },
+    { n: 'agency', t: 'text' }, { n: 'budget', t: 'text' }, { n: 'location', t: 'text' },
+    { n: 'message', t: 'area' }, { n: 'source', t: 'text' }, { n: 'converted_to_id', t: 'text', ro: 1 }
+  ];
+
+  var TABS = [
+    { k: 'dashboard', label: '📊 Dashboard' },
+    { k: 'website_enquiries', label: '📥 விசாரணைகள் / Enquiries', pk: 'id', order: 'submitted_at', filter: 'status', noAdd: 1,
+      show: ['submitted_at', 'requirement_type', 'name', 'mobile', 'district', 'taluk', 'status'],
+      quick: { label: 'மாற்று', show: function (r) { return r.status !== 'Converted' && ['Buyer', 'Seller', 'Investor', 'Broker'].indexOf(r.requirement_type) !== -1; },
+        run: function (r) { return sb.rpc('promote_enquiry', { p_id: r.id }).then(function (res) { if (res.error) throw res.error; toast('உருவாக்கப்பட்டது: ' + res.data); }); } } },
+    { sep: 1 },
+    { k: 'properties', label: 'சொத்துகள் / Properties', pk: 'property_id', prefix: 'PROP', filter: 'property_status',
+      show: ['property_id', 'district', 'taluk', 'village', 'layout_name', 'survey_no', 'extent', 'extent_unit', 'property_type', 'asking_price', 'property_status', 'location_public'],
+      quick: { label: function (r) { return (r.property_status === 'Listed' || r.property_status === 'Investment Ready') ? 'மறை' : 'வெளியிடு'; },
+        show: function () { return true; },
+        run: function (r) { var pub = (r.property_status === 'Listed' || r.property_status === 'Investment Ready'); var next = pub ? 'Draft' : 'Listed';
+          return sb.from('properties').update({ property_status: next }).eq('property_id', r.property_id).then(function (res) { if (res.error) throw res.error; r.property_status = next; toast(pub ? 'மறைக்கப்பட்டது' : 'வெப்சைட்டில் வெளியிடப்பட்டது ✔'); }); } } },
+    { k: 'layout_projects', label: '🏗️ Bulk Layout Projects', pk: 'layout_name', order: 'updated_at',
+      show: ['layout_name', 'highlight_icon', 'updated_at'] },
+    { k: 'owners', label: 'உரிமையாளர்கள் / Owners', pk: 'owner_id', prefix: 'OWN', filter: 'status',
+      show: ['owner_id', 'owner_entity_name', 'mobile', 'village', 'taluk', 'district', 'kyc_status', 'status'],
+      quick: { label: 'KYC சரிபார்', show: function (r) { return r.kyc_status !== 'Verified'; },
+        run: function (r) { return sb.from('owners').update({ kyc_status: 'Verified' }).eq('owner_id', r.owner_id).then(function (res) { if (res.error) throw res.error; r.kyc_status = 'Verified'; toast('KYC சரிபார்க்கப்பட்டது ✔'); }); } } },
+    { k: 'brokers', label: 'தரகர்கள் / Brokers', pk: 'broker_id', prefix: 'BRK', filter: 'status',
+      show: ['broker_id', 'full_name', 'business_agency', 'mobile', 'area', 'kyc_status', 'status'],
+      quick: { label: 'அங்கீகரி', show: function (r) { return r.status === 'Pending Approval'; },
+        run: function (r) { return sb.from('brokers').update({ status: 'Active' }).eq('broker_id', r.broker_id).then(function (res) { if (res.error) throw res.error; r.status = 'Active'; toast('தரகர் அங்கீகரிக்கப்பட்டார் ✔'); }); } } },
+    { k: 'buyers', label: 'வாங்குபவர்கள் / Buyers', pk: 'buyer_id', prefix: 'BUY', filter: 'lead_status',
+      show: ['buyer_id', 'full_name_entity', 'mobile', 'preferred_district', 'preferred_taluk', 'budget_min', 'budget_max', 'property_type', 'lead_status'] },
+    { k: 'investors', label: 'முதலீட்டாளர்கள் / Investors', pk: 'investor_id', prefix: 'INV', filter: 'status',
+      show: ['investor_id', 'name_entity', 'mobile', 'preferred_district', 'investment_min', 'investment_max', 'status'] },
+    { k: 'requirements', label: 'தேவைகள் / Requirements', pk: 'requirement_id', prefix: 'REQ', filter: 'status',
+      show: ['requirement_id', 'requirement_type', 'person_entity_id', 'preferred_district', 'budget_min', 'budget_max', 'property_type', 'priority', 'status'] },
+    { k: 'matching', label: 'பொருத்தம் / Matching', pk: 'match_id', prefix: 'MATCH', filter: 'status',
+      show: ['match_id', 'property_id', 'requirement_id', 'match_score', 'status', 'assigned_to'] },
+    { k: 'transactions', label: 'பரிவர்த்தனைகள் / Transactions', pk: 'transaction_id', prefix: 'TXN', filter: 'transaction_status',
+      show: ['transaction_id', 'property_id', 'buyer_id', 'transaction_type', 'transaction_value', 'transaction_status', 'payment_status'] },
+    { sep: 1 },
+    { k: 'property_brokers', label: 'Property ↔ Broker', pk: 'link_id', prefix: 'PB', show: ['link_id', 'property_id', 'broker_id', 'broker_role', 'submission_date'] },
+    { k: 'documents', label: 'ஆவணங்கள் / Documents', pk: 'document_id', prefix: 'DOC', filter: 'verification_status',
+      show: ['document_id', 'property_id', 'document_type', 'document_number', 'verification_status', 'received_date'] },
+    { k: 'verification_log', label: 'சரிபார்ப்பு / Verification', pk: 'verification_id', prefix: 'VER', filter: 'status',
+      show: ['verification_id', 'property_id', 'verification_type', 'stage', 'status', 'verification_date'] },
+    { k: 'activity_log', label: 'செயல்பாடுகள் / Activity', pk: 'activity_id', prefix: 'ACT', filter: 'activity_type',
+      show: ['activity_id', 'activity_date', 'person_entity_id', 'activity_type', 'outcome', 'next_followup'] },
+    { k: 'commission_log', label: 'கமிஷன் / Commission', pk: 'commission_id', prefix: 'COM', filter: 'payment_status',
+      show: ['commission_id', 'transaction_id', 'broker_id', 'broker_share', 'company_share', 'payment_status'] }
+  ];
+  var TAB = {}; TABS.forEach(function (t) { if (t.k) TAB[t.k] = t; });
+
+  var $ = function (s) { return document.querySelector(s); };
+  function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  window.captureGPS = function (btn) {
+    if (!navigator.geolocation) { alert('இந்த browser-ல் GPS ஆதரவு இல்லை'); return; }
+    var origLabel = btn.textContent;
+    btn.disabled = true; btn.textContent = '📍 பெறுகிறது…';
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var form = btn.closest('form');
+      var latInp = form ? form.elements['gps_latitude'] : null;
+      var lngInp = form ? form.elements['gps_longitude'] : null;
+      if (latInp) latInp.value = pos.coords.latitude.toFixed(6);
+      if (lngInp) lngInp.value = pos.coords.longitude.toFixed(6);
+      btn.disabled = false; btn.textContent = origLabel;
+    }, function (err) {
+      alert('இருப்பிடத்தை பெற முடியவில்லை: ' + err.message);
+      btn.disabled = false; btn.textContent = origLabel;
+    }, { enableHighAccuracy: true, timeout: 15000 });
+  };
+  function toast(msg, err) {
+    var t = document.createElement('div'); t.className = 'toast' + (err ? ' err' : ''); t.textContent = msg;
+    document.body.appendChild(t); setTimeout(function () { t.remove(); }, err ? 6000 : 2600);
+  }
+
+  if (!CFG.SUPABASE_URL || CFG.SUPABASE_URL.indexOf('YOUR_PROJECT_REF') !== -1) {
+    $('#loginMsg').className = 'msg err';
+    $('#loginMsg').textContent = 'config.js-ல் SUPABASE_URL / SUPABASE_ANON_KEY சேர்க்கவும்.';
+    $('#loginBtn').disabled = true;
+    return;
+  }
+  var sb = supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+
+  // ---------- districts / taluks (for dropdowns in forms) ----------
+  var districts = [], taluksByDistrict = {}, districtsLoaded = false;
+  function loadDistricts() {
+    if (districtsLoaded) return Promise.resolve();
+    return Promise.all([
+      sb.from('districts').select('district_name').order('district_name'),
+      sb.from('taluks').select('taluk_name,district_name').order('taluk_name').range(0, 999)
+    ]).then(function (r) {
+      if (r[0].error || r[1].error) { console.error(r[0].error || r[1].error); return; }
+      districts = r[0].data.map(function (x) { return x.district_name; });
+      r[1].data.forEach(function (t) { (taluksByDistrict[t.district_name] = taluksByDistrict[t.district_name] || []).push(t.taluk_name); });
+      districtsLoaded = true;
+    });
+  }
+  // column-name pairs that should render as a district / taluk dropdown
+  var DISTRICT_COLS = { district: 'taluk', preferred_district: 'preferred_taluk' };
+  var TALUK_COLS = { taluk: 'district', preferred_taluk: 'preferred_district' };
+
+  // ---------- auth ----------
+  function showLogin(msg, ok) {
+    $('#appView').classList.add('hidden'); $('#loginView').classList.remove('hidden');
+    $('#loginMsg').textContent = msg || ''; $('#loginMsg').className = 'msg ' + (ok ? 'ok' : 'err');
+  }
+  function enter(user) {
+    return sb.from('admins').select('user_id').eq('user_id', user.id).maybeSingle().then(function (r) {
+      if (r.error || !r.data) {
+        return sb.auth.signOut().then(function () { showLogin('இந்த கணக்குக்கு நிர்வாகி அனுமதி இல்லை.'); });
+      }
+      loadDistricts();
+      $('#whoEmail').textContent = user.email;
+      $('#loginView').classList.add('hidden'); $('#appView').classList.remove('hidden');
+      buildSide(); openTab(location.hash.slice(1) in TAB || location.hash === '#dashboard' ? location.hash.slice(1) : 'dashboard');
+    });
+  }
+  $('#loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var b = $('#loginBtn'); b.disabled = true; b.textContent = 'சரிபார்க்கிறது...';
+    sb.auth.signInWithPassword({ email: $('#em').value.trim(), password: $('#pw').value }).then(function (r) {
+      b.disabled = false; b.textContent = 'உள்நுழை';
+      if (r.error) { showLogin('மின்னஞ்சல் அல்லது கடவுச்சொல் தவறு.'); return; }
+      $('#pw').value = ''; enter(r.data.user);
+    });
+  });
+  $('#logoutBtn').addEventListener('click', function () { sb.auth.signOut().then(function () { showLogin('வெளியேறிவிட்டீர்கள்.', true); }); });
+  sb.auth.getSession().then(function (r) { if (r.data && r.data.session) enter(r.data.session.user); });
+
+  // ---------- sidebar ----------
+  var counts = {};
+  function buildSide() {
+    $('#side').innerHTML = TABS.map(function (t) {
+      if (t.sep) return '<hr>';
+      var pill = t.k === 'website_enquiries' && counts.newEnq ? '<span class="pill">' + counts.newEnq + '</span>' : '';
+      return '<button data-k="' + t.k + '">' + esc(t.label) + pill + '</button>';
+    }).join('');
+    $('#side').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { openTab(b.dataset.k); }); });
+    sb.from('website_enquiries').select('id', { count: 'exact', head: true }).eq('status', 'New').then(function (r) {
+      if (!r.error) { counts.newEnq = r.count; var b = $('#side [data-k="website_enquiries"]'); if (b && r.count && !b.querySelector('.pill')) b.insertAdjacentHTML('beforeend', '<span class="pill">' + r.count + '</span>'); }
+    });
+  }
+
+  // ---------- tabs ----------
+  var cur = null, rows = [], page = 0, PAGE = 25, q = '', fval = '';
+  function openTab(k) {
+    cur = k; q = ''; fval = ''; page = 0; location.hash = k;
+    document.querySelectorAll('#side button').forEach(function (b) { b.classList.toggle('on', b.dataset.k === k); });
+    if (k === 'dashboard') return renderDashboard();
+    $('#main').innerHTML = '<div class="empty">ஏற்றுகிறது...</div>';
+    var cfg = TAB[k], order = cfg.order || 'created_at';
+    sb.from(k).select('*').order(order, { ascending: false }).range(0, 999).then(function (r) {
+      if (r.error) { $('#main').innerHTML = '<div class="empty">பிழை: ' + esc(r.error.message) + '</div>'; return; }
+      rows = r.data; renderTable();
+    });
+  }
+
+  function renderDashboard() {
+    var items = [
+      ['website_enquiries', 'புதிய விசாரணைகள் (Form வழி)', { status: 'New' }, 'hot'],
+      ['properties', 'சரிபார்ப்புக்கு காத்திருக்கும் சொத்துகள்', { property_status: 'Draft' }, 'hot'],
+      ['properties', 'இணையதளத்தில் Listed', { property_status: 'Listed' }, 'hot'],
+      ['properties', 'மொத்த சொத்துகள்'], ['brokers', 'தரகர்கள்'],
+      ['owners', 'உரிமையாளர்கள்'], ['buyers', 'வாங்குபவர்கள்'], ['investors', 'முதலீட்டாளர்கள்'],
+      ['matching', 'பொருத்தங்கள்'], ['transactions', 'பரிவர்த்தனைகள்']
+    ];
+    $('#main').innerHTML = '<div class="bar"><h2>Dashboard</h2></div><div class="cards">' + items.map(function (it, i) {
+      return '<div class="card ' + (it[3] || '') + '" data-k="' + it[0] + '"><div class="num" id="c' + i + '">…</div><div class="lbl">' + esc(it[1]) + '</div></div>';
+    }).join('') +
+      '<div class="card hot" data-k="activity_log"><div class="num" id="cFollowup">…</div><div class="lbl">இன்று / தாமதமான பின்தொடர்தல்கள்</div></div>' +
+      '<div class="card hot" data-k="commission_log"><div class="num" id="cCommission">…</div><div class="lbl">நிலுவையிலுள்ள கமிஷன் (&#8377;)</div></div>' +
+      '</div>';
+    $('#main').querySelectorAll('.card').forEach(function (c) { c.addEventListener('click', function () { openTab(c.dataset.k); }); });
+    items.forEach(function (it, i) {
+      var qy = sb.from(it[0]).select('*', { count: 'exact', head: true });
+      if (it[2]) Object.keys(it[2]).forEach(function (f) { qy = qy.eq(f, it[2][f]); });
+      qy.then(function (r) { var el = $('#c' + i); if (el) el.textContent = r.error ? '–' : r.count; });
+    });
+    sb.from('activity_log').select('*', { count: 'exact', head: true }).lte('next_followup', new Date().toISOString().slice(0, 10))
+      .then(function (r) { var el = $('#cFollowup'); if (el) el.textContent = r.error ? '–' : r.count; });
+    sb.from('commission_log').select('broker_share').eq('payment_status', 'Pending')
+      .then(function (r) {
+        var el = $('#cCommission'); if (!el) return;
+        if (r.error) { el.textContent = '–'; return; }
+        var total = (r.data || []).reduce(function (s, row) { return s + (Number(row.broker_share) || 0); }, 0);
+        el.textContent = total.toLocaleString('en-IN');
+      });
+  }
+
+  function tagClass(v) {
+    v = String(v || '').toLowerCase();
+    if (/^(verified|listed|converted|closed|paid|active|signed|investment ready)/.test(v)) return 'good';
+    if (/(pending|new|draft|progress|submitted|part|open|raw|negotiation)/.test(v)) return 'warn';
+    if (/(reject|failed|spam|blacklist|suspend|cancel|dispute|litigation|lost)/.test(v)) return 'bad';
+    return '';
+  }
+  function fmt(col, v) {
+    if (v == null || v === '') return '';
+    if (col === 'submitted_at') return esc(new Date(v).toLocaleString('en-IN'));
+    if (typeof v === 'boolean') return '<span class="tag ' + (v ? 'good' : '') + '">' + (v ? 'Yes' : 'No') + '</span>';
+    var isStatus = /status$|^priority$|role$|_type$/.test(col) && !/^(property_type|document_type|transaction_type|activity_type|verification_type|requirement_type)$/.test(col);
+    if (isStatus || col === 'requirement_type') return '<span class="tag ' + tagClass(v) + '">' + esc(v) + '</span>';
+    if (typeof v === 'number' && /price|value|budget|investment|share/.test(col)) return esc(v.toLocaleString('en-IN'));
+    return esc(v);
+  }
+
+  function filtered() {
+    var cfg = TAB[cur], s = q.trim().toLowerCase();
+    return rows.filter(function (r) {
+      if (fval && String(r[cfg.filter]) !== fval) return false;
+      if (!s) return true;
+      return Object.keys(r).some(function (k) { return r[k] != null && String(r[k]).toLowerCase().indexOf(s) !== -1; });
+    });
+  }
+
+  function renderTable() {
+    var cfg = TAB[cur], list = filtered(), pages = Math.max(1, Math.ceil(list.length / PAGE));
+    if (page >= pages) page = pages - 1;
+    var vals = cfg.filter ? Array.from(new Set(rows.map(function (r) { return r[cfg.filter]; }).filter(Boolean))).sort() : [];
+    var slice = list.slice(page * PAGE, page * PAGE + PAGE);
+    var h = '<div class="bar"><h2>' + esc(cfg.label) + ' <small style="font-weight:400;color:#5c6773">(' + list.length + ')</small></h2>' +
+      '<input id="q" placeholder="🔍 தேடு..." value="' + esc(q) + '">' +
+      (cfg.filter ? '<select id="fsel"><option value="">அனைத்து ' + esc(cfg.filter) + '</option>' + vals.map(function (v) { return '<option' + (v === fval ? ' selected' : '') + '>' + esc(v) + '</option>'; }).join('') + '</select>' : '') +
+      '<button class="btn ghost" id="csvBtn">⬇ CSV</button>' + (cfg.noAdd ? '' : '<button class="btn green" id="addBtn">＋ புதியது</button>') +
+      (cur === 'properties' ? '<button class="btn" id="bulkAddBtn">🧱 Layout பிளாட்கள் Bulk Add</button>' : '') + '</div>';
+    if (!list.length) h += '<div class="tablewrap"><div class="empty">பதிவுகள் இல்லை.</div></div>';
+    else {
+      h += '<div class="tablewrap"><table><thead><tr>' + cfg.show.map(function (c) { return '<th>' + esc(c.replace(/_/g, ' ')) + '</th>'; }).join('') + (cfg.quick ? '<th></th>' : '') + '</tr></thead><tbody>' +
+        slice.map(function (r, i) {
+          var qcell = '';
+          if (cfg.quick && cfg.quick.show(r)) {
+            var lbl = typeof cfg.quick.label === 'function' ? cfg.quick.label(r) : cfg.quick.label;
+            qcell = '<td><button class="btn green qbtn" data-i="' + (page * PAGE + i) + '" style="padding:5px 12px;font-size:12.5px;">' + esc(lbl) + '</button></td>';
+          } else if (cfg.quick) qcell = '<td></td>';
+          return '<tr data-i="' + (page * PAGE + i) + '">' + cfg.show.map(function (c) { return '<td title="' + esc(r[c]) + '">' + fmt(c, r[c]) + '</td>'; }).join('') + qcell + '</tr>';
+        }).join('') +
+        '</tbody></table></div><div class="pager"><button class="btn ghost" id="prev"' + (page === 0 ? ' disabled' : '') + '>&larr;</button><span>' + (page + 1) + ' / ' + pages + '</span><button class="btn ghost" id="next"' + (page >= pages - 1 ? ' disabled' : '') + '>&rarr;</button></div>';
+      if (rows.length >= 1000) h += '<p class="hint" style="font-size:12px;color:#5c6773">முதல் 1000 பதிவுகள் மட்டும் காட்டப்படுகின்றன — தேடலை பயன்படுத்தவும்.</p>';
+    }
+    $('#main').innerHTML = h;
+    var qi = $('#q'); qi.addEventListener('input', function () { q = qi.value; page = 0; var pos = qi.selectionStart; renderTable(); var n = $('#q'); n.focus(); n.setSelectionRange(pos, pos); });
+    var fs = $('#fsel'); if (fs) fs.addEventListener('change', function () { fval = fs.value; page = 0; renderTable(); });
+    $('#csvBtn').addEventListener('click', function () { csv(list); });
+    var ab = $('#addBtn'); if (ab) ab.addEventListener('click', function () { openForm(null); });
+    var bab = $('#bulkAddBtn'); if (bab) bab.addEventListener('click', openBulkForm);
+    var pv = $('#prev'), nx = $('#next');
+    if (pv) pv.addEventListener('click', function () { page--; renderTable(); });
+    if (nx) nx.addEventListener('click', function () { page++; renderTable(); });
+    $('#main').querySelectorAll('tbody tr').forEach(function (tr) { tr.addEventListener('click', function () { openForm(list[Number(tr.dataset.i)]); }); });
+    $('#main').querySelectorAll('.qbtn').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var r = list[Number(b.dataset.i)];
+        b.disabled = true; b.textContent = '...';
+        cfg.quick.run(r).then(function () { renderTable(); }).catch(function (err) { b.disabled = false; toast(err.message || 'பிழை', true); });
+      });
+    });
+  }
+
+  function csv(list) {
+    var cols = META[cur].map(function (c) { return c.n; });
+    var lines = [cols.join(',')].concat(list.map(function (r) {
+      return cols.map(function (c) { var v = r[c] == null ? '' : String(r[c]); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(',');
+    }));
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\n')], { type: 'text/csv;charset=utf-8' }));
+    a.download = cur + '_' + new Date().toISOString().slice(0, 10) + '.csv'; a.click();
+  }
+
+  // ---------- add / edit form ----------
+  function nextId(cfg) {
+    return sb.from(cur).select(cfg.pk).range(0, 4999).then(function (r) {
+      var max = 0; (r.data || []).forEach(function (x) { var n = parseInt(String(x[cfg.pk]).replace(/\D/g, ''), 10); if (n > max) max = n; });
+      return cfg.prefix + String(max + 1).padStart(3, '0');
+    });
+  }
+
+  // ---------- district-coded IDs (BRK-CPT-0001 style) ----------
+  var DISTRICT_CODE = {
+    Ariyalur: 'ARY', Chengalpattu: 'CPT', Chennai: 'CHN', Coimbatore: 'CBE', Cuddalore: 'CDL',
+    Dharmapuri: 'DPI', Dindigul: 'DGL', Erode: 'ERD', Kallakurichi: 'KKI', Kanchipuram: 'KPM',
+    Kanyakumari: 'KKM', Karur: 'KRR', Krishnagiri: 'KRG', Madurai: 'MDU', Mayiladuthurai: 'MYT',
+    Nagapattinam: 'NGP', Namakkal: 'NMK', Nilgiris: 'NLG', Perambalur: 'PRB', Pudukkottai: 'PDK',
+    Ramanathapuram: 'RMD', Ranipet: 'RNP', Salem: 'SLM', Sivaganga: 'SVG', Tenkasi: 'TNK',
+    Thanjavur: 'TNJ', Theni: 'THN', Thoothukudi: 'TTK', Tiruchirappalli: 'TRY', Tirunelveli: 'TNV',
+    Tirupathur: 'TPT', Tiruppur: 'TPR', Tiruvallur: 'TVL', Tiruvannamalai: 'TVM', Tiruvarur: 'TVR',
+    Vellore: 'VLR', Viluppuram: 'VPM', Virudhunagar: 'VDN'
+  };
+  // which column (in each table) decides the district code baked into new IDs
+  var ID_DISTRICT_FIELD = { properties: 'district', owners: 'district', buyers: 'preferred_district', investors: 'preferred_district', requirements: 'preferred_district', brokers: '__brk_district' };
+  function districtCode(name) { return DISTRICT_CODE[name] || 'GEN'; }
+  function nextIdCoded(cfg, code) {
+    var pattern = cfg.prefix + '-' + code + '-';
+    return sb.from(cur).select(cfg.pk).ilike(cfg.pk, pattern + '%').range(0, 4999).then(function (r) {
+      var max = 0, re = new RegExp('^' + pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\d+)$');
+      (r.data || []).forEach(function (x) { var m = String(x[cfg.pk]).match(re); if (m) { var n = parseInt(m[1], 10); if (n > max) max = n; } });
+      return pattern + String(max + 1).padStart(4, '0');
+    });
+  }
+
+  function openForm(row) {
+    var cfg = TAB[cur], isNew = !row, cols = META[cur];
+    var root = $('#modalRoot');
+    function build(newId) {
+      var idIsCoded = isNew && cfg.prefix && ID_DISTRICT_FIELD[cur] && districtsLoaded;
+      var fields = cols.map(function (c) {
+        var v = isNew ? (c.pk && newId ? newId : '') : row[c.n];
+        if (typeof v === 'boolean') v = v ? 'Yes' : 'No'; // real boolean columns (e.g. location_public) rendered as Yes/No enum
+        var ro = c.ro || (c.pk && !isNew) || c.t === 'ts';
+        if (isNew && c.ro) return '';
+        var fid = 'f_' + c.n;
+        var lab = '<label for="' + fid + '">' + esc(c.n) + (c.req ? ' <i>*</i>' : '') + '</label>', inp;
+        if (idIsCoded && c.pk) {
+          inp = '<input id="pkAutoField" name="' + c.n + '" value="' + esc(cfg.prefix + '-???') + '" readonly>' +
+            '<p class="hint" style="margin:4px 0 0;">மாவட்டம் தேர்ந்தவுடன் ' + esc(cfg.prefix) + '-மாவட்டக்குறி-எண் தானாக உருவாகும்</p>';
+          lab = '<label for="pkAutoField">' + esc(c.n) + (c.req ? ' <i>*</i>' : '') + '</label>';
+          return '<div>' + lab + inp + '</div>';
+        }
+        if (DISTRICT_COLS[c.n] && districtsLoaded) {
+          inp = '<select id="' + fid + '" name="' + c.n + '" data-district-for="' + DISTRICT_COLS[c.n] + '"' + (ro ? ' disabled' : '') + '><option value="">தேர்வு செய்க</option>' +
+            districts.map(function (d) { return '<option' + (d === v ? ' selected' : '') + '>' + esc(d) + '</option>'; }).join('') + '</select>';
+        } else if (TALUK_COLS[c.n] && districtsLoaded) {
+          inp = '<select id="' + fid + '" name="' + c.n + '" data-taluk-of="' + TALUK_COLS[c.n] + '"' + (ro ? ' disabled' : '') + '><option value="">முதலில் மாவட்டம் தேர்வு செய்க</option></select>';
+        } else if (c.t === 'enum') inp = '<select id="' + fid + '" name="' + c.n + '"' + (ro ? ' disabled' : '') + '><option value=""></option>' + c.e.map(function (o) { return '<option' + (o === v ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') + '</select>';
+        else if (c.t === 'area') inp = '<textarea id="' + fid + '" name="' + c.n + '" rows="3">' + esc(v) + '</textarea>';
+        else if (c.t === 'arr') inp = '<input id="' + fid + '" name="' + c.n + '" value="' + esc(Array.isArray(v) ? v.join(', ') : (v || '')) + '"' + (ro ? ' readonly' : '') + '><p class="hint" style="margin:4px 0 0;">காற்புள்ளியால் பிரிக்கவும் — எ.கா. Road Access, Electricity, Water Supply, Park</p>';
+        else if (c.t === 'date') inp = '<input id="' + fid + '" type="date" name="' + c.n + '" value="' + esc(v ? String(v).slice(0, 10) : '') + '">';
+        else if (c.t === 'ts') inp = '<input id="' + fid + '" name="' + c.n + '" value="' + esc(v ? new Date(v).toLocaleString('en-IN') : '') + '" readonly>';
+        else if (c.t === 'num') {
+          inp = '<input id="' + fid + '" type="number" step="any" name="' + c.n + '" value="' + esc(v) + '"' + (ro ? ' readonly' : '') + '>';
+          if (c.n === 'gps_latitude' && !ro) inp += '<button type="button" class="btn ghost" style="margin-top:6px;font-size:12px;padding:6px 10px;width:100%;" onclick="captureGPS(this)">📍 தற்போதைய இருப்பிடத்தை பயன்படுத்து (site visit)</button>';
+        }
+        else inp = '<input id="' + fid + '" name="' + c.n + '" value="' + esc(v) + '"' + (ro ? ' readonly' : '') + '>';
+        var hintHtml = c.hint ? ('<p class="hint" style="margin:4px 0 0;">' + esc(c.hint) + '</p>') : '';
+        return '<div class="' + (c.t === 'area' ? 'full' : '') + '">' + lab + inp + hintHtml + '</div>';
+      }).join('');
+      var canConvert = cur === 'website_enquiries' && row && row.status !== 'Converted' && ['Buyer', 'Seller', 'Investor', 'Broker'].indexOf(row.requirement_type) !== -1;
+      var idDistrictField = '';
+      if (cur === 'brokers' && idIsCoded && districtsLoaded) {
+        idDistrictField = '<div><label for="brkDistrictForId">மாவட்டம் (ID-க்காக) <i>*</i></label><select id="brkDistrictForId" data-brk-id-field="1"><option value="">தேர்வு செய்க</option>' +
+          districts.map(function (d) { return '<option>' + esc(d) + '</option>'; }).join('') + '</select></div>';
+      }
+      var ACT_PERSON_TYPE = { buyers: 'Buyer', investors: 'Investor' };
+      var activitySection = '';
+      if (['buyers', 'investors', 'requirements', 'properties'].indexOf(cur) !== -1 && !isNew) {
+        activitySection = '<div class="full" style="margin-top:6px;border-top:1px solid var(--line);padding-top:14px;">' +
+          '<label style="font-size:13px;">📞 அடுத்த தொடர்பு / செயல்பாடு பதிவு</label>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">' +
+          '<select id="actType" aria-label="செயல்பாடு வகை"><option>Call</option><option>WhatsApp</option><option>Meeting</option><option>Site Visit</option><option>Email</option><option>Follow-up</option><option>Document Collection</option><option>Negotiation</option><option>Registration</option><option>Other</option></select>' +
+          '<select id="actPriority" aria-label="முன்னுரிமை"><option value="">முன்னுரிமை</option><option>High</option><option>Medium</option><option>Low</option></select>' +
+          '<input id="actOutcome" aria-label="என்ன பேசினீர்கள் / முடிவு" placeholder="என்ன பேசினீர்கள் / முடிவு" style="grid-column:1/-1;">' +
+          '<div><label for="actNextDate" style="font-size:11.5px;font-weight:600;color:#3a4451;">அடுத்த தொடர்பு தேதி</label><input type="date" id="actNextDate"></div>' +
+          '<div style="align-self:end;"><button type="button" class="btn ghost" id="actSaveBtn" style="width:100%;">＋ பதிவு செய்</button></div>' +
+          '</div><div id="actList" style="margin-top:10px;font-size:12.5px;color:#5c6773;"></div></div>';
+      }
+      var PHOTO_CFG = {
+        properties: { pk: 'property_id', bucket: 'property-photos', prefix: '' },
+        layout_projects: { pk: 'layout_name', bucket: 'property-photos', prefix: 'LAYOUT_' },
+        brokers: { pk: 'broker_id', bucket: 'property-photos', prefix: 'BROKER_' }
+      };
+      var photoSection = '';
+      if (PHOTO_CFG[cur] && !isNew) {
+        var existingPhotos = row.photo_urls || [];
+        photoSection = '<div class="full" style="margin-top:6px;border-top:1px solid var(--line);padding-top:14px;">' +
+          '<label style="font-size:13px;">📷 ' + (cur === 'brokers' ? 'தரகரின் புகைப்படம் / Photo' : 'புகைப்படங்கள்') + '</label>' +
+          '<div id="photoThumbs" style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;">' +
+          existingPhotos.map(function (url, i) {
+            return '<div style="position:relative;"><img src="' + esc(url) + '" alt="Photo ' + (i + 1) + '" style="width:88px;height:88px;object-fit:cover;border-radius:8px;border:1px solid var(--line);">' +
+              '<a href="#" data-rm-photo="' + i + '" aria-label="Remove photo" style="position:absolute;top:-6px;right:-6px;background:var(--red);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:12px;">✕</a></div>';
+          }).join('') + '</div>' +
+          '<input type="file" id="photoFileInput" aria-label="புகைப்படங்கள் பதிவேற்ற" accept="image/*" multiple>' +
+          '<span id="photoUploadStatus" style="margin-left:8px;font-size:12.5px;color:#5c6773;"></span></div>';
+      }
+      var brokerSection = '';
+      if (cur === 'properties' && !isNew) {
+        brokerSection = '<div class="full" style="margin-top:6px;border-top:1px solid var(--line);padding-top:14px;">' +
+          '<label style="font-size:13px;">🤝 தரகர் இணைப்பு</label>' +
+          '<div id="brokerLinks" style="margin:8px 0;font-size:13.5px;color:#5c6773;">ஏற்றுகிறது…</div>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+          '<select id="brkSel" aria-label="தரகரைத் தேர்வு செய்க" style="flex:2;min-width:160px;"><option value="">தரகரைத் தேர்வு செய்க…</option></select>' +
+          '<select id="brkRole" aria-label="தரகர் பங்கு" style="flex:1;min-width:120px;"><option>Primary</option><option>Co-Broker</option><option>Referral</option><option>Sub-Broker</option></select>' +
+          '<button type="button" class="btn ghost" id="brkAddBtn">＋ இணை</button></div></div>';
+      } else if (cur === 'properties' && isNew) {
+        brokerSection = '<div class="full" style="margin-top:6px;border-top:1px solid var(--line);padding-top:14px;">' +
+          '<label style="font-size:13px;">🤝 இந்த சொத்தை கொண்டுவந்த தரகர் (விருப்பம்)</label>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">' +
+          '<select id="brkSelNew" aria-label="தரகரைத் தேர்வு செய்க" style="flex:2;min-width:160px;"><option value="">தரகர்கள் ஏற்றப்படுகிறது…</option></select>' +
+          '<select id="brkRoleNew" aria-label="தரகர் பங்கு" style="flex:1;min-width:120px;"><option>Primary</option><option>Co-Broker</option><option>Referral</option><option>Sub-Broker</option></select>' +
+          '</div><p class="hint" style="margin:6px 0 0;">"சேமி" அழுத்தும்போது இந்த தரகருடன் தானாக இணைக்கப்படும்.</p></div>';
+      }
+      root.innerHTML = '<div class="overlay" id="ov"><form class="panel" id="rf"><h3>' + esc(cfg.label) + '</h3><div class="hint">' + (isNew ? 'புதிய பதிவு' : esc(row[cfg.pk])) + '</div>' +
+        '<div class="fgrid">' + fields + idDistrictField + photoSection + brokerSection + activitySection + '</div><p class="msg err" id="rmsg"></p>' +
+        '<div class="actions"><button class="btn green" type="submit">சேமி</button>' +
+        (canConvert ? '<button class="btn" type="button" id="convBtn">➜ Record ஆக மாற்று</button>' : '') +
+        '<button class="btn ghost" type="button" id="cancelBtn">மூடு</button></div></form></div>';
+      $('#ov').addEventListener('mousedown', function (e) { if (e.target.id === 'ov') root.innerHTML = ''; });
+      $('#cancelBtn').addEventListener('click', function () { root.innerHTML = ''; });
+
+      // district -> taluk cascade
+      $('#rf').querySelectorAll('select[data-district-for]').forEach(function (dSel) {
+        var talukName = dSel.getAttribute('data-district-for');
+        var tSel = $('#rf').querySelector('select[name="' + talukName + '"]');
+        function fillTaluk(preselect) {
+          if (!tSel) return;
+          var list = taluksByDistrict[dSel.value] || [];
+          tSel.innerHTML = '<option value="">' + (dSel.value ? 'வட்டத்தை தேர்வு செய்க' : 'முதலில் மாவட்டம் தேர்வு செய்க') + '</option>' +
+            list.map(function (t) { return '<option' + (t === preselect ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('');
+        }
+        fillTaluk(isNew ? '' : row[talukName]);
+        dSel.addEventListener('change', function () { fillTaluk(''); });
+      });
+
+      // district-coded ID: regenerate the ID as soon as the relevant district is chosen
+      if (idIsCoded) {
+        var idFieldSel = (cur === 'brokers') ? $('#brkDistrictForId') : $('#rf').querySelector('select[name="' + ID_DISTRICT_FIELD[cur] + '"]');
+        var pkInput = $('#pkAutoField');
+        if (idFieldSel && pkInput) {
+          idFieldSel.addEventListener('change', function () {
+            if (!idFieldSel.value) { pkInput.value = cfg.prefix + '-???'; return; }
+            pkInput.value = cfg.prefix + '-' + districtCode(idFieldSel.value) + '-…';
+            nextIdCoded(cfg, districtCode(idFieldSel.value)).then(function (id) { pkInput.value = id; });
+            if (cur === 'brokers') {
+              var areaEl = $('#rf').elements['area'];
+              if (areaEl && !areaEl.value.trim()) areaEl.value = idFieldSel.value;
+            }
+          });
+        }
+      }
+
+      // activity / follow-up logging (buyers, investors, requirements, properties)
+      if (['buyers', 'investors', 'requirements', 'properties'].indexOf(cur) !== -1 && !isNew) {
+        var actList = $('#actList');
+        function actKeyFor() {
+          if (cur === 'properties') return { property_id: row.property_id, person_entity_id: null, person_type: null };
+          if (cur === 'requirements') return { property_id: null, person_entity_id: row.person_entity_id, person_type: row.requirement_type, requirement_id: row.requirement_id };
+          return { property_id: null, person_entity_id: row[cfg.pk], person_type: ACT_PERSON_TYPE[cur] };
+        }
+        function loadActs() {
+          var k = actKeyFor();
+          var q = sb.from('activity_log').select('*').order('activity_date', { ascending: false }).limit(5);
+          q = k.property_id ? q.eq('property_id', k.property_id) : q.eq('person_entity_id', k.person_entity_id);
+          q.then(function (r) {
+            var rows = r.data || [];
+            actList.innerHTML = rows.length ? ('சமீபத்திய பதிவுகள்: ' + rows.map(function (a) {
+              return esc(a.activity_date) + ' — ' + esc(a.activity_type) + (a.outcome ? (': ' + esc(a.outcome)) : '') + (a.next_followup ? (' (அடுத்தது: ' + esc(a.next_followup) + ')') : '');
+            }).join('<br>')) : 'இதுவரை பதிவு இல்லை.';
+          });
+        }
+        loadActs();
+        $('#actSaveBtn').addEventListener('click', function () {
+          var k = actKeyFor();
+          var payload = {
+            activity_id: 'ACT' + Date.now() + Math.random().toString(36).slice(2, 6),
+            activity_date: new Date().toISOString().slice(0, 10),
+            activity_type: $('#actType').value,
+            outcome: $('#actOutcome').value || null,
+            next_followup: $('#actNextDate').value || null,
+            priority: $('#actPriority').value || null,
+            property_id: k.property_id, person_entity_id: k.person_entity_id, person_type: k.person_type,
+            requirement_id: k.requirement_id || null
+          };
+          sb.from('activity_log').insert([payload]).then(function (r) {
+            if (r.error) { toast(r.error.message, true); return; }
+            toast('பதிவு சேமிக்கப்பட்டது ✔'); $('#actOutcome').value = ''; $('#actNextDate').value = ''; loadActs();
+          });
+        });
+      }
+
+      // photo upload (properties + layout_projects + brokers, existing records)
+      if (PHOTO_CFG[cur] && !isNew) {
+        var pcfg = PHOTO_CFG[cur];
+        var photoInput = $('#photoFileInput'), photoStatus = $('#photoUploadStatus'), photoThumbs = $('#photoThumbs');
+        function renderThumbs(urls) {
+          photoThumbs.innerHTML = urls.map(function (url, i) {
+            return '<div style="position:relative;"><img src="' + esc(url) + '" alt="Photo ' + (i + 1) + '" style="width:88px;height:88px;object-fit:cover;border-radius:8px;border:1px solid var(--line);">' +
+              '<a href="#" data-rm-photo="' + i + '" aria-label="Remove photo" style="position:absolute;top:-6px;right:-6px;background:var(--red);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:12px;">✕</a></div>';
+          }).join('');
+          photoThumbs.querySelectorAll('[data-rm-photo]').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+              e.preventDefault();
+              var idx = Number(a.dataset.rmPhoto);
+              var next = urls.slice(0, idx).concat(urls.slice(idx + 1));
+              sb.from(cur).update({ photo_urls: next }).eq(pcfg.pk, row[pcfg.pk]).then(function (r) {
+                if (r.error) { toast(r.error.message, true); return; }
+                row.photo_urls = next; renderThumbs(next); toast('புகைப்படம் நீக்கப்பட்டது ✔');
+              });
+            });
+          });
+        }
+        renderThumbs(row.photo_urls || []);
+        photoInput.addEventListener('change', function () {
+          var files = Array.from(photoInput.files || []);
+          if (!files.length) return;
+          photoStatus.textContent = 'பதிவேற்றுகிறது…';
+          var uploads = files.map(function (file) {
+            var path = pcfg.prefix + row[pcfg.pk] + '/' + Date.now() + '_' + Math.random().toString(36).slice(2, 7) + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+            return sb.storage.from(pcfg.bucket).upload(path, file).then(function (r) {
+              if (r.error) throw r.error;
+              return sb.storage.from(pcfg.bucket).getPublicUrl(path).data.publicUrl;
+            });
+          });
+          Promise.all(uploads).then(function (newUrls) {
+            var merged = (row.photo_urls || []).concat(newUrls);
+            return sb.from(cur).update({ photo_urls: merged }).eq(pcfg.pk, row[pcfg.pk]).then(function (r) {
+              if (r.error) throw r.error;
+              row.photo_urls = merged; renderThumbs(merged);
+              photoStatus.textContent = ''; photoInput.value = ''; toast('புகைப்படங்கள் சேர்க்கப்பட்டன ✔');
+            });
+          }).catch(function (err) {
+            photoStatus.textContent = ''; toast('பதிவேற்றம் தோல்வி: ' + (err.message || err), true);
+          });
+        });
+      }
+
+      // broker linking (properties only, existing records)
+      if (cur === 'properties' && !isNew) {
+        var brkBox = $('#brokerLinks'), brkSel = $('#brkSel'), brkAdd = $('#brkAddBtn');
+        function loadLinks() {
+          Promise.all([
+            sb.from('property_brokers').select('link_id,broker_id,broker_role,brokers(full_name)').eq('property_id', row.property_id),
+            sb.from('brokers').select('broker_id,full_name').eq('status', 'Active').order('full_name')
+          ]).then(function (r) {
+            var links = (r[0].data || []), allBrokers = (r[1].data || []);
+            brkBox.innerHTML = links.length ? links.map(function (l) {
+              return '<span class="tag" style="margin:2px 6px 2px 0;">' + esc((l.brokers && l.brokers.full_name) || l.broker_id) + ' — ' + esc(l.broker_role) +
+                ' <a href="#" data-unlink="' + l.link_id + '" style="color:var(--red);margin-left:4px;">✕</a></span>';
+            }).join('') : 'இணைக்கப்பட்ட தரகர் இல்லை.';
+            brkBox.querySelectorAll('[data-unlink]').forEach(function (a) {
+              a.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (!confirm('இந்த தரகர் இணைப்பை நீக்கவா?')) return;
+                sb.from('property_brokers').delete().eq('link_id', a.dataset.unlink).then(function () { loadLinks(); });
+              });
+            });
+            var already = links.map(function (l) { return l.broker_id; });
+            brkSel.innerHTML = '<option value="">தரகரைத் தேர்வு செய்க…</option>' + allBrokers.filter(function (b) { return already.indexOf(b.broker_id) === -1; })
+              .map(function (b) { return '<option value="' + esc(b.broker_id) + '">' + esc(b.full_name) + ' (' + esc(b.broker_id) + ')</option>'; }).join('');
+          });
+        }
+        loadLinks();
+        brkAdd.addEventListener('click', function () {
+          if (!brkSel.value) return;
+          brkAdd.disabled = true;
+          sb.from('property_brokers').insert([{ property_id: row.property_id, broker_id: brkSel.value, broker_role: $('#brkRole').value }]).then(function (r) {
+            brkAdd.disabled = false;
+            if (r.error) { toast(r.error.message, true); return; }
+            toast('தரகர் இணைக்கப்பட்டார் ✔'); loadLinks();
+          });
+        });
+      } else if (cur === 'properties' && isNew) {
+        sb.from('brokers').select('broker_id,full_name').eq('status', 'Active').order('full_name').then(function (r) {
+          var sel = $('#brkSelNew'); if (!sel) return;
+          var allBrokers = r.data || [];
+          sel.innerHTML = '<option value="">தரகரைத் தேர்வு செய்க… (விருப்பம்)</option>' +
+            allBrokers.map(function (b) { return '<option value="' + esc(b.broker_id) + '">' + esc(b.full_name) + ' (' + esc(b.broker_id) + ')</option>'; }).join('');
+        });
+      }
+
+      var cb = $('#convBtn');
+      if (cb) cb.addEventListener('click', function () {
+        if (!confirm('இந்த விசாரணையை ' + row.requirement_type + ' record ஆக மாற்றவா?' + (row.requirement_type === 'Seller' ? '\n(Owner + Property "Draft" ஆக உருவாகும் — இணையதளத்தில் தெரியாது.)' : ''))) return;
+        cb.disabled = true;
+        sb.rpc('promote_enquiry', { p_id: row.id }).then(function (r) {
+          if (r.error) { cb.disabled = false; $('#rmsg').textContent = r.error.message; return; }
+          root.innerHTML = ''; toast('உருவாக்கப்பட்டது: ' + r.data); openTab(cur);
+        });
+      });
+      $('#rf').addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (idIsCoded && $('#pkAutoField').value.indexOf('?') !== -1) {
+          $('#rmsg').textContent = 'ID உருவாக, முதலில் மாவட்டத்தைத் தேர்ந்தெடுக்கவும்.'; return;
+        }
+        var payload = {}, f = $('#rf');
+        cols.forEach(function (c) {
+          if (c.ro || c.t === 'ts') return;
+          if (!isNew && c.pk) return;
+          var el = f.elements[c.n]; if (!el || el.disabled) return;
+          var v = el.value.trim();
+          if (isNew && v === '') return;                       // let DB defaults apply
+          if (c.t === 'arr') {
+            var arr = v.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+            payload[c.n] = arr.length ? arr : null;
+          } else if (v === '') payload[c.n] = null;
+          else payload[c.n] = c.t === 'num' ? Number(v) : v;
+        });
+        if (!isNew) {                                          // send only what changed
+          Object.keys(payload).forEach(function (k) { var o = row[k]; if ((o == null ? null : String(o)) === (payload[k] == null ? null : String(payload[k]))) delete payload[k]; });
+          if (!Object.keys(payload).length) { root.innerHTML = ''; return; }
+        }
+        var newBrokerId = (cur === 'properties' && isNew && $('#brkSelNew')) ? $('#brkSelNew').value : '';
+        var newBrokerRole = (cur === 'properties' && isNew && $('#brkRoleNew')) ? $('#brkRoleNew').value : 'Primary';
+        var qy = isNew ? sb.from(cur).insert([payload]) : sb.from(cur).update(payload).eq(cfg.pk, row[cfg.pk]);
+        qy.then(function (r) {
+          if (r.error) { $('#rmsg').textContent = r.error.message; return; }
+          if (newBrokerId) {
+            sb.from('property_brokers').insert([{ property_id: payload.property_id, broker_id: newBrokerId, broker_role: newBrokerRole }]).then(function (br) {
+              root.innerHTML = '';
+              toast(br.error ? ('சொத்து சேமிக்கப்பட்டது ✔ (தரகர் இணைப்பு தோல்வி: ' + br.error.message + ')') : 'சொத்து சேமிக்கப்பட்டு, தரகருடன் இணைக்கப்பட்டது ✔', !!br.error);
+              openTab(cur);
+            });
+          } else {
+            root.innerHTML = ''; toast('சேமிக்கப்பட்டது ✔'); openTab(cur);
+          }
+        });
+      });
+    }
+    if (isNew && cfg.prefix && ID_DISTRICT_FIELD[cur] && districtsLoaded) build();
+    else if (isNew && cfg.prefix) nextId(cfg).then(build);
+    else build();
+  }
+
+  // ---------- bulk add: many plots of one layout at once ----------
+  var LAND_TYPE_E = ["Dry Land", "Wet Land", "Government Land", "Assigned Land", "Natham"];
+  var VSTATUS_E = ["Pending", "In Progress", "Verified", "Partially Verified", "Failed", "Not Available"];
+  var YN_E = ["Yes", "No", "Not Available"];
+  var PSTATUS_E = ["Draft", "Listed", "Under Verification", "Investment Ready", "Reserved", "Under Negotiation", "Sold", "Archived", "Withdrawn", "Litigation Hold", "Not for Sale", "On Hold"];
+  var SOURCE_E = ["Broker Referral", "Field Visit", "Website", "WhatsApp", "Walk-in", "Cold Call", "Social Media", "Existing Client Referral", "Other"];
+  var HILITE_E = ["🔥 Hot Deal", "⭐ Featured", "🆕 New", "💰 Best Price", "⚡ Urgent Sale", "👑 Premium"];
+  var EXTUNIT_E = ["Sq.ft", "Cent", "Acre", "Ground", "Sq.yard", "Hectare"];
+
+  function bulkSel(id, opts, def) {
+    return '<select id="' + id + '"><option value="">—</option>' + opts.map(function (o) { return '<option' + (o === def ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') + '</select>';
+  }
+
+  function openBulkForm() {
+    loadDistricts().then(function () {
+      var root = $('#modalRoot');
+      root.innerHTML = '<div class="overlay" id="ov2"><form class="panel wide" id="bf"><h3>🧱 Layout பிளாட்கள் — Bulk Add</h3>' +
+        '<div class="hint">ஒரு Layout-இல் உள்ள பல பிளாட்களை (100–300 கூட) ஒரே முறையில் சேர்க்க. கீழே பொதுவான தகவல்களை ஒரு முறை நிரப்பி, ஒவ்வொரு பிளாட்டின் Plot No / பரப்பளவு / விலையை மட்டும் பட்டியலாக ஒட்டவும்.</div>' +
+
+        '<div class="bulk-step"><h4>1️⃣ அனைத்து பிளாட்களுக்கும் பொதுவான தகவல்</h4>' +
+        '<div class="fgrid">' +
+        '<div><label>மாவட்டம் <i>*</i></label><select id="bDistrict"><option value="">தேர்வு செய்க</option>' + (districts || []).map(function (d) { return '<option>' + esc(d) + '</option>'; }).join('') + '</select></div>' +
+        '<div><label>வட்டம் (Taluk)</label><select id="bTaluk"><option value="">முதலில் மாவட்டம் தேர்வு செய்க</option></select></div>' +
+        '<div><label>கிராமம் (Village)</label><input id="bVillage"></div>' +
+        '<div><label>Landmark</label><input id="bLandmark"></div>' +
+        '<div class="full"><label>Layout பெயர் <i>*</i></label><input id="bLayoutName"><p class="hint" style="margin:4px 0 0;">Layout Projects-இல் பதிவு செய்த அதே பெயரை சரியாக டைப் செய்யவும்.</p></div>' +
+        '<div><label>நில வகை</label>' + bulkSel('bLandType', LAND_TYPE_E) + '</div>' +
+        '<div><label>சாலை அணுகல்</label>' + bulkSel('bRoadAccess', YN_E, 'Yes') + '</div>' +
+        '<div><label>பட்டா நிலை</label>' + bulkSel('bPatta', VSTATUS_E) + '</div>' +
+        '<div><label>EC நிலை</label>' + bulkSel('bEc', VSTATUS_E) + '</div>' +
+        '<div><label>ஒப்புதல் (Approval) நிலை</label>' + bulkSel('bApproval', VSTATUS_E) + '</div>' +
+        '<div><label>வழக்கு (Litigation)</label>' + bulkSel('bLitigation', YN_E, 'No') + '</div>' +
+        '<div><label>சொத்து நிலை</label>' + bulkSel('bStatus', PSTATUS_E, 'Listed') + '</div>' +
+        '<div><label>Source</label>' + bulkSel('bSource', SOURCE_E) + '</div>' +
+        '<div><label>Highlight</label>' + bulkSel('bHighlight', HILITE_E) + '</div>' +
+        '<div><label>உரிமையாளர் ID (Owner ID) — தெரிந்தால்</label><input id="bOwnerId"></div>' +
+        '<div class="full"><label>Amenities</label><input id="bAmenities"><p class="hint" style="margin:4px 0 0;">காற்புள்ளியால் பிரிக்கவும் — எ.கா. Road Access, Electricity, Water Supply, Park</p></div>' +
+        '</div></div>' +
+
+        '<div class="bulk-step"><h4>2️⃣ இயல்பு (Default) பரப்பளவு &amp; விலை — விருப்பம்</h4>' +
+        '<div class="hint">கீழே பட்டியலில் எல்லா பிளாட்டுக்கும் தனித்தனி பரப்பளவு/விலை கொடுக்கலாம். ஒரே அளவு/விலை என்றால் இங்கே ஒரு முறை நிரப்பினால் போதும் — கீழே Plot No மட்டும் பட்டியலிடலாம்.</div>' +
+        '<div class="fgrid">' +
+        '<div><label>அளவு அலகு (Unit)</label>' + bulkSel('bExtUnit', EXTUNIT_E, 'Sq.ft') + '</div>' +
+        '<div><label>இயல்பு பரப்பளவு</label><input id="bDefExtent" type="number" step="any"></div>' +
+        '<div><label>இயல்பு விலை (₹)</label><input id="bDefPrice" type="number" step="any"></div>' +
+        '<div><label>சாலை அகலம் (அடி)</label><input id="bRoadWidth" type="number" step="any"></div>' +
+        '</div></div>' +
+
+        '<div class="bulk-step"><h4>3️⃣ ஒவ்வொரு பிளாட்டின் விவரம் <i style="color:var(--red);font-style:normal;">*</i></h4>' +
+        '<div class="hint">ஒரு வரிக்கு ஒரு பிளாட். Excel-இலிருந்து நேரடியாக ஒட்டலாம் (Tab-ஆல் பிரிக்கப்பட்டது), அல்லது காற்புள்ளியால் பிரித்து டைப் செய்யலாம்:<br>' +
+        '<b>Plot No</b> மட்டும் — அல்லது — <b>Plot No, பரப்பளவு</b> — அல்லது — <b>Plot No, பரப்பளவு, விலை</b><br>எ.கா:<br>' +
+        '<code>12, 2400, 1850000</code><br><code>13, 2600, 2000000</code><br><code>14</code> (இயல்பு பரப்பளவு/விலை பயன்படுத்தப்படும்)</div>' +
+        '<textarea id="bRows" class="bulk-textarea" rows="10" placeholder="12, 2400, 1850000&#10;13, 2600, 2000000&#10;14, 2400, 1850000"></textarea>' +
+        '<div class="bulk-count" id="bCount">0 பிளாட்கள் தயார்</div>' +
+        '<div class="bulk-preview-wrap" id="bPreviewWrap" style="display:none;"><table><thead><tr><th>Survey/Plot No</th><th>பரப்பளவு</th><th>விலை</th></tr></thead><tbody id="bPreviewBody"></tbody></table></div>' +
+        '</div>' +
+
+        '<p class="msg err" id="bmsg"></p>' +
+        '<div class="actions"><button class="btn green" type="submit" id="bSaveBtn">எல்லாம் சேமி</button><button class="btn ghost" type="button" id="bCancelBtn">மூடு</button></div>' +
+        '</form></div>';
+
+      $('#ov2').addEventListener('mousedown', function (e) { if (e.target.id === 'ov2') root.innerHTML = ''; });
+      $('#bCancelBtn').addEventListener('click', function () { root.innerHTML = ''; });
+
+      $('#bDistrict').addEventListener('change', function () {
+        var list = taluksByDistrict[this.value] || [];
+        $('#bTaluk').innerHTML = '<option value="">' + (this.value ? 'வட்டத்தை தேர்வு செய்க' : 'முதலில் மாவட்டம் தேர்வு செய்க') + '</option>' +
+          list.map(function (t) { return '<option>' + esc(t) + '</option>'; }).join('');
+      });
+
+      function parseRows() {
+        var raw = $('#bRows').value;
+        var lines = raw.split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+        var defExtent = $('#bDefExtent').value.trim();
+        var defPrice = $('#bDefPrice').value.trim();
+        var out = [], bad = [];
+        lines.forEach(function (line, idx) {
+          var parts = line.indexOf('\t') !== -1 ? line.split('\t') : line.split(',');
+          parts = parts.map(function (p) { return p.trim(); }).filter(function (p, i) { return i === 0 || p !== ''; });
+          var plotNo = parts[0];
+          var extent = parts[1] !== undefined && parts[1] !== '' ? parts[1] : defExtent;
+          var price = parts[2] !== undefined && parts[2] !== '' ? parts[2] : defPrice;
+          if (!plotNo) { bad.push(idx + 1); return; }
+          if (extent === '' || isNaN(Number(extent))) { bad.push(idx + 1); return; }
+          out.push({ plotNo: plotNo, extent: Number(extent), price: (price !== '' && !isNaN(Number(price))) ? Number(price) : null });
+        });
+        return { rows: out, badLines: bad };
+      }
+
+      function refreshPreview() {
+        var parsed = parseRows();
+        var cEl = $('#bCount');
+        cEl.className = 'bulk-count' + (parsed.badLines.length ? ' warn' : '');
+        cEl.textContent = parsed.rows.length + ' பிளாட்கள் தயார்' + (parsed.badLines.length ? (' — வரி ' + parsed.badLines.join(', ') + ' தவறாக உள்ளது (Plot No / பரப்பளவு விட்டுவிடாதீர்கள் அல்லது இயல்பு பரப்பளவு நிரப்பவும்)') : '');
+        var wrap = $('#bPreviewWrap'), body = $('#bPreviewBody');
+        if (!parsed.rows.length) { wrap.style.display = 'none'; return; }
+        wrap.style.display = 'block';
+        body.innerHTML = parsed.rows.slice(0, 30).map(function (r) {
+          return '<tr><td>' + esc(r.plotNo) + '</td><td>' + esc(r.extent) + '</td><td>' + (r.price != null ? esc(r.price) : '—') + '</td></tr>';
+        }).join('') + (parsed.rows.length > 30 ? '<tr><td colspan="3" style="color:#8a94a1;">… மேலும் ' + (parsed.rows.length - 30) + ' பிளாட்கள்</td></tr>' : '');
+        return parsed;
+      }
+      ['bRows', 'bDefExtent', 'bDefPrice'].forEach(function (id) { $('#' + id).addEventListener('input', refreshPreview); });
+
+      $('#bf').addEventListener('submit', function (e) {
+        e.preventDefault();
+        $('#bmsg').textContent = '';
+        var district = $('#bDistrict').value, layoutName = $('#bLayoutName').value.trim();
+        if (!district) { $('#bmsg').textContent = 'மாவட்டத்தை தேர்வு செய்யவும் (Property ID உருவாக்க தேவை).'; return; }
+        if (!layoutName) { $('#bmsg').textContent = 'Layout பெயரை நிரப்பவும்.'; return; }
+        var parsed = parseRows();
+        if (!parsed.rows.length) { $('#bmsg').textContent = 'குறைந்தது ஒரு பிளாட் தகவலாவது பட்டியலில் இருக்க வேண்டும்.'; return; }
+        if (parsed.badLines.length) { $('#bmsg').textContent = 'சில வரிகளில் பிழை உள்ளது — சரி செய்த பின் மீண்டும் முயற்சிக்கவும் (மேலே சிவப்பில் காட்டப்பட்ட வரி எண்களை பார்க்கவும்).'; return; }
+
+        var common = {
+          district: district,
+          taluk: $('#bTaluk').value || null,
+          village: $('#bVillage').value.trim() || null,
+          location_landmark: $('#bLandmark').value.trim() || null,
+          layout_name: layoutName,
+          property_type: 'Plot / Layout',
+          land_type: $('#bLandType').value || null,
+          layout_amenities: (function () { var a = $('#bAmenities').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean); return a.length ? a : null; })(),
+          road_access: $('#bRoadAccess').value || null,
+          road_width: $('#bRoadWidth').value ? Number($('#bRoadWidth').value) : null,
+          patta_status: $('#bPatta').value || null,
+          ec_status: $('#bEc').value || null,
+          approval_status: $('#bApproval').value || null,
+          litigation_flag: $('#bLitigation').value || null,
+          property_status: $('#bStatus').value || 'Listed',
+          source: $('#bSource').value || null,
+          highlight_icon: $('#bHighlight').value || null,
+          owner_id: $('#bOwnerId').value.trim() || null,
+          extent_unit: $('#bExtUnit').value || 'Sq.ft',
+          created_date: new Date().toISOString().slice(0, 10)
+        };
+
+        var saveBtn = $('#bSaveBtn'); saveBtn.disabled = true; saveBtn.textContent = 'ஐடி உருவாக்குகிறது...';
+        var code = districtCode(district), prefix = 'PROP-' + code + '-';
+        sb.from('properties').select('property_id').ilike('property_id', prefix + '%').range(0, 4999).then(function (r) {
+          if (r.error) { saveBtn.disabled = false; saveBtn.textContent = 'எல்லாம் சேமி'; $('#bmsg').textContent = r.error.message; return; }
+          var max = 0, re = new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\d+)$');
+          (r.data || []).forEach(function (x) { var m = String(x.property_id).match(re); if (m) { var n = parseInt(m[1], 10); if (n > max) max = n; } });
+
+          var payloadRows = parsed.rows.map(function (row, i) {
+            var id = prefix + String(max + 1 + i).padStart(4, '0');
+            var p = {};
+            Object.keys(common).forEach(function (k) { p[k] = common[k]; });
+            p.property_id = id;
+            p.survey_no = row.plotNo;
+            p.extent = row.extent;
+            p.asking_price = row.price;
+            return p;
+          });
+
+          var CHUNK = 150, chunks = [];
+          for (var i = 0; i < payloadRows.length; i += CHUNK) chunks.push(payloadRows.slice(i, i + CHUNK));
+          var done = 0;
+          function insertNext(idx) {
+            if (idx >= chunks.length) {
+              root.innerHTML = '';
+              toast(payloadRows.length + ' பிளாட்கள் சேமிக்கப்பட்டன ✔');
+              openTab('properties');
+              return;
+            }
+            saveBtn.textContent = 'சேமிக்கிறது... (' + done + ' / ' + payloadRows.length + ')';
+            sb.from('properties').insert(chunks[idx]).then(function (res) {
+              if (res.error) {
+                saveBtn.disabled = false; saveBtn.textContent = 'எல்லாம் சேமி';
+                $('#bmsg').textContent = done + ' பிளாட்கள் சேமிக்கப்பட்டன, பிறகு பிழை: ' + res.error.message + ' — மீதமுள்ளவற்றை மீண்டும் முயற்சிக்கவும் (ஏற்கனவே சேமிக்கப்பட்ட Plot No-க்களை பட்டியலிலிருந்து நீக்கிவிட்டு).';
+                return;
+              }
+              done += chunks[idx].length;
+              insertNext(idx + 1);
+            });
+          }
+          insertNext(0);
+        });
+      });
+
+      refreshPreview();
+    });
+  }
+
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') $('#modalRoot').innerHTML = ''; });
+})();
+</script>
+</body>
+</html>
