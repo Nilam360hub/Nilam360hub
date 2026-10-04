@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nilam360hub.github.io/Nilam360hub/sitemap.xml
