@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Compass test</title>
+<style>body{font:16px/1.6 system-ui;margin:16px;background:#0b2545;color:#fff}pre{background:#13315c;padding:12px;border-radius:10px;white-space:pre-wrap}</style></head><body>
+<h2>Compass test</h2><p>போனைத் தட்டையாகப் பிடித்துத் திருப்புங்கள்.</p><div style="text-align:center"><svg id="sv" viewBox="-60 -60 120 120" width="200" height="200"><circle r="52" fill="none" stroke="#6fd35a" stroke-width="6"/><g id="nd"><polygon points="0,-40 9,0 -9,0" fill="#e53935"/><polygon points="0,40 9,0 -9,0" fill="#1e88e5"/></g><circle r="4" fill="#fff"/></svg><div id="hd" style="font-size:22px">–</div></div><pre id="o">waiting…</pre>
+<script>
+var c={abs:0,rel:0,sen:0},last={},o=document.getElementById('o');
+function show(){o.textContent='deviceorientationabsolute events: '+c.abs+'\ndeviceorientation events: '+c.rel+'\nAbsoluteOrientationSensor readings: '+c.sen+'\nlast absolute: '+JSON.stringify(last.abs||null)+'\nlast relative: '+JSON.stringify(last.rel||null)+'\nsecure context: '+window.isSecureContext+'\nsensor API: '+('AbsoluteOrientationSensor' in window);}
+window.addEventListener('deviceorientationabsolute',function(e){c.abs++;var D=Math.PI/180,x=e.beta*D,z=e.alpha*D,hh;if(Math.abs(e.beta)<50)hh=Math.atan2(-Math.sin(z)*Math.cos(x),Math.cos(z)*Math.cos(x))/D;else{var y=e.gamma*D;hh=Math.atan2(-Math.cos(z)*Math.sin(y)-Math.sin(z)*Math.sin(x)*Math.cos(y),-Math.sin(z)*Math.sin(y)+Math.cos(z)*Math.sin(x)*Math.cos(y))/D;}if(hh<0)hh+=360;document.getElementById('nd').setAttribute('transform','rotate('+(-hh)+')');document.getElementById('hd').textContent=Math.round(hh)+'° (0=வடக்கு)';last.abs={a:e.alpha&&+e.alpha.toFixed(1),b:e.beta&&+e.beta.toFixed(1),g:e.gamma&&+e.gamma.toFixed(1),abs:e.absolute};show();},true);
+window.addEventListener('deviceorientation',function(e){c.rel++;last.rel={a:e.alpha&&+e.alpha.toFixed(1),abs:e.absolute};show();},true);
+try{var s=new AbsoluteOrientationSensor({frequency:10});s.addEventListener('reading',function(){c.sen++;show();});s.addEventListener('error',function(e){last.err=e.error&&e.error.name;o.textContent+='\nsensor error: '+last.err;});s.start();}catch(e){o.textContent+='\nsensor exception: '+e.name;}
+show();setInterval(show,1000);
+</script></body></html>
