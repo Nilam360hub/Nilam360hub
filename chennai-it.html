@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nilam360 – Land near Chennai for Buyers</title>
+<meta name="description" content="சென்னையைச் சுற்றி நிலம் வாங்க நினைப்பவர்களுக்கான இலவச ஆலோசனை. ஆவண விவரங்கள் தேதியுடன் ஒப்பிட்டுக் காட்டப்படும்.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#123A63;--navy-d:#0A2542;--gold:#C8962D;--gold-l:#F6E9C8;--green:#3F9142;--paper:#F7F9FB;--tint:#EEF3F6;--ink:#17202B;--mute:#5E6B79;--line:#D9E1E8;--white:#fff;--err:#B3261E}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Noto Sans Tamil','Nirmala UI','Latha',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px}
+img{max-width:100%}
+a{color:var(--navy)}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:18px}
+header.top{background:var(--navy-d);color:#fff}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.brand img{width:40px;height:34px;background:#fff;border-radius:7px;padding:3px}
+.brand b{font-size:19px;letter-spacing:1px;font-weight:800}
+.callbtn{background:var(--gold);color:#fff;text-decoration:none;font-weight:700;padding:8px 14px;border-radius:8px;font-size:14px;white-space:nowrap}
+.hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-d) 100%);color:#fff;padding-block:42px 54px}
+.hero .wrap{display:grid;gap:26px;grid-template-columns:1.15fr .85fr;align-items:center}
+.tag{display:inline-block;background:rgba(246,233,200,.16);color:var(--gold-l);border:1px solid rgba(246,233,200,.35);padding:3px 12px;border-radius:99px;font-size:13px;font-weight:600}
+h1{font-size:clamp(26px,5.4vw,42px);line-height:1.3;margin:14px 0 12px;font-weight:800;text-wrap:balance}
+.hero p{margin:0 0 20px;color:#DCE6F0;max-width:34em}
+.cta{display:inline-block;background:var(--gold);color:#fff;font-weight:800;text-decoration:none;padding:13px 24px;border-radius:10px;font-size:16px}
+.cta.alt{background:transparent;border:1.5px solid rgba(255,255,255,.55);margin-left:8px}
+.facts{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:18px}
+.facts h2{margin:0 0 10px;font-size:15px;color:var(--gold-l);font-weight:600}
+.facts li{list-style:none;margin:0;padding:8px 0;border-top:1px solid rgba(255,255,255,.14);font-size:15px}
+.facts li:first-of-type{border-top:0}
+.facts ul{margin:0;padding:0}
+section{padding-block:46px}
+h2.sec{font-size:clamp(22px,4.2vw,30px);margin:0 0 6px;color:var(--navy);font-weight:800;text-wrap:balance}
+.lead{margin:0 0 24px;color:var(--mute);max-width:40em}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h3{margin:0 0 6px;font-size:17px;color:var(--navy)}
+.card p{margin:0;color:var(--mute);font-size:15px}
+.ic{width:38px;height:38px;border-radius:10px;background:var(--gold-l);color:var(--navy);display:grid;place-items:center;font-weight:800;margin-bottom:10px}
+.steps{counter-reset:s;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));padding:0;margin:0}
+.steps li{list-style:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px 16px 58px;position:relative}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:grid;place-items:center}
+.steps b{display:block;color:var(--navy);margin-bottom:2px}
+.steps span{color:var(--mute);font-size:15px}
+.alt-bg{background:var(--tint)}
+.docs{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));padding:0;margin:0}
+.docs li{list-style:none;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.docs b{color:var(--navy)}
+.docs span{display:block;color:var(--mute);font-size:14.5px}
+.formbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;max-width:640px;margin-inline:auto;box-shadow:0 8px 30px rgba(18,58,99,.08)}
+label{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px;color:var(--navy)}
+input,select,textarea{width:100%;font:inherit;padding:11px 12px;border:1.5px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:3px solid rgba(200,150,45,.35);border-color:var(--gold)}
+.row2{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.chk{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px;color:var(--mute)}
+.chk input{width:20px;height:20px;margin-top:3px;flex:none}
+button.send{width:100%;margin-top:16px;background:var(--navy);color:#fff;font:inherit;font-weight:800;border:0;border-radius:10px;padding:14px;font-size:16px;cursor:pointer}
+button.send:disabled{opacity:.6;cursor:wait}
+.msg{margin-top:14px;padding:12px 14px;border-radius:9px;font-size:15px}
+.msg.ok{background:#E6F4E7;color:#1E5E22}
+.msg.bad{background:#FBE9E7;color:var(--err)}
+.note{font-size:13px;color:var(--mute);max-width:46em;margin:18px auto 0;text-align:center}
+footer{background:var(--navy-d);color:#C9D6E3;padding-block:26px;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+footer a{color:var(--gold-l)}
+@media(max-width:420px){.callbtn{font-size:12.5px;padding:7px 10px}.brand b{font-size:17px}}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr}.cta.alt{margin:10px 0 0}.row2{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+html[lang="ta"] .en,html[lang="en"] .ta{display:none!important}
+.lang{display:flex;border:1.5px solid rgba(255,255,255,.5);border-radius:8px;overflow:hidden}
+.lang button{font:inherit;font-size:13px;font-weight:700;background:transparent;color:#fff;border:0;padding:6px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--gold)}
+.hd-r{display:flex;align-items:center;gap:8px}
+h2.sec{line-height:1.3}
+@media(max-width:480px){.brand b{display:none}.callbtn{font-size:12.5px;padding:7px 9px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><img src="logo_mark.png" alt="Nilam360"><b>NILAM360</b></a>
+  <div class="hd-r">
+    <div class="lang" role="group" aria-label="Language"><button type="button" id="bta" aria-pressed="true">தமிழ்</button><button type="button" id="ben" aria-pressed="false">EN</button></div>
+    <a class="callbtn" href="tel:+917010880360"><span class="ta">அழை: 70108 80360</span><span class="en">Call: 70108 80360</span></a>
+  </div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <span class="tag"><span class="ta">சென்னையைச் சுற்றி சொத்து வாங்க நினைப்பவர்களுக்காக</span><span class="en">For those looking to buy property around Chennai</span></span>
+    <h1><span class="ta">சென்னைக்கு அருகில் நிலம் வாங்க, ஆவணங்களை முதலில் ஒப்பிட்டுப் பார்க்கும் வழி</span><span class="en">Buy land near Chennai, with documents compared first</span></h1>
+    <p><span class="ta">நேரம் குறைவாக இருக்கும்போது நிலம் தேடுவது சுலபம் அல்ல. உங்கள் தேவையைச் சொல்லுங்கள். பொருந்தும் சொத்துகளை, தேதியுடன் ஒப்பிடப்பட்ட ஆவண விவரங்களுடன், வார இறுதியில் நேரில் பார்க்க நில முகவர்கள் மூலம் ஏற்பாடு செய்கிறோம்.</span><span class="en">Searching for land when your time is limited is hard. Tell us what you need. We shortlist matching properties with dated document comparisons and arrange weekend site visits through independent real estate agents.</span></p>
+    <a class="cta" href="#enquiry"><span class="ta">இலவச ஆலோசனை பெறுங்கள்</span><span class="en">Get a free consultation</span></a><a class="cta alt" href="#docs"><span class="ta">வாங்கும் முன் பார்க்க வேண்டிய ஆவணங்கள்</span><span class="en">Documents to check before buying</span></a>
+  </div>
+  <aside class="facts">
+    <h2><span class="ta">Nilam360 மூலம் என்ன கிடைக்கும்</span><span class="en">What you get with Nilam360</span></h2>
+    <ul><li><span class="ta">சொத்தின் இடம், GPS மற்றும் புகைப்படங்கள்</span><span class="en">Location, GPS and photos of each property</span></li><li><span class="ta">பட்டா, சிட்டா போன்ற ஆவணங்களின் சரிபார்ப்பு</span><span class="en">Checks on patta, chitta and other documents</span></li><li><span class="ta">வார இறுதி நேரப் பார்வைக்கு ஏற்பாடு</span><span class="en">Weekend site visits arranged for you</span></li><li><span class="ta">பத்திரப்பதிவு வரை ஒருங்கிணைப்பு</span><span class="en">Coordination up to registration</span></li></ul>
+  </aside>
+</div></div>
+<section><div class="wrap"><h2 class="sec"><span class="ta">நிலம் வாங்கும்போது வரும் கவலைகள்</span><span class="en">What worries buyers when buying land</span></h2><p class="lead"><span class="ta">இந்தக் கவலைகளை நாங்கள் முதலிலேயே கவனிக்கிறோம்.</span><span class="en">We address these concerns first.</span></p><div class="grid"><div class="card"><div class="ic">1</div><h3><span class="ta">"இந்த நிலம் உண்மையா?"</span><span class="en">"Is this land genuine?"</span></h3><p><span class="ta">ஒவ்வொரு சொத்தின் ஆவண விவரங்களையும் அரசு இணையதளங்களில் உள்ளவற்றுடன் ஒப்பிட்டுப் பார்க்கிறோம். ஆவணங்களில் சந்தேகம் இருந்தால் அதை உங்களிடம் வெளிப்படையாகத் தெரிவிக்கிறோம்.</span><span class="en">We compare each property's document details with government portals. If a document raises doubts, we tell you openly.</span></p></div><div class="card"><div class="ic">2</div><h3><span class="ta">"தேட நேரம் இல்லை"</span><span class="en">"No time to search"</span></h3><p><span class="ta">உங்கள் பட்ஜெட், பகுதி, பரப்பளவு சொன்னால் பொருத்தமான சொத்துகளை நாங்களே தேர்ந்தெடுத்துத் தருகிறோம்.</span><span class="en">Share your budget, area and size, and we pick suitable properties for you.</span></p></div><div class="card"><div class="ic">3</div><h3><span class="ta">"தூரத்திலிருந்து எப்படிப் பார்ப்பது?"</span><span class="en">"How do I see it from far away?"</span></h3><p><span class="ta">GPS இடம் மற்றும் புகைப்படங்களுடன் முதலில் இணையத்தில் பாருங்கள். பிடித்தால் வார இறுதியில் நேரில் செல்லலாம்.</span><span class="en">View GPS location and photos online first. If you like it, visit on a weekend.</span></p></div><div class="card"><div class="ic">4</div><h3><span class="ta">"ஏமாற்றப்படுவேனோ?"</span><span class="en">"What if I get cheated?"</span></h3><p><span class="ta">தகவல்கள் வெளிப்படையாக இருக்கும். வாங்கும் முன் உங்கள் சொந்த வழக்கறிஞரிடம் கருத்தும் பெறுங்கள் என்றே பரிந்துரைக்கிறோம்.</span><span class="en">Information stays transparent. We also recommend getting a legal opinion from your own lawyer before you buy.</span></p></div></div></div></section><section class="alt-bg"><div class="wrap"><h2 class="sec"><span class="ta">எப்படி வேலை செய்கிறது</span><span class="en">How it works</span></h2><p class="lead"><span class="ta">நான்கு படிகள், உங்கள் நேரத்துக்கு ஏற்ப.</span><span class="en">Four steps, on your schedule.</span></p><ol class="steps"><li><b><span class="ta">தேவையைச் சொல்லுங்கள்</span><span class="en">Tell us your need</span></b><span><span class="ta">படிவத்தை நிரப்புங்கள் அல்லது அழையுங்கள்.</span><span class="en">Fill the form or call us.</span></span></li><li><b><span class="ta">பொருந்தும் சொத்துகள்</span><span class="en">Matching properties</span></b><span><span class="ta">உங்கள் பட்ஜெட் மற்றும் பகுதிக்கு ஏற்ற சொத்துகளைப் பகிர்கிறோம்.</span><span class="en">We share properties that fit your budget and area.</span></span></li><li><b><span class="ta">ஆவணச் சரிபார்ப்பு</span><span class="en">Document check</span></b><span><span class="ta">தேர்ந்தெடுத்த சொத்தின் ஆவணங்களை ஆராய்ந்து விளக்குகிறோம்.</span><span class="en">We review the documents of the chosen property and explain them.</span></span></li><li><b><span class="ta">நேரப் பார்வை மற்றும் பதிவு</span><span class="en">Site visit and registration</span></b><span><span class="ta">வார இறுதிப் பார்வை, பிறகு பத்திரப்பதிவு வரை ஒருங்கிணைப்பு.</span><span class="en">Weekend visit, then coordination up to registration.</span></span></li></ol></div></section><section id="docs"><div class="wrap"><h2 class="sec"><span class="ta">நிலம் வாங்கும் முன் பார்க்க வேண்டிய 6 ஆவணங்கள்</span><span class="en">6 documents to check before buying land</span></h2><p class="lead"><span class="ta">இவை பொதுவான வழிகாட்டி. உங்கள் வழக்கறிஞர் கூடுதலாகக் கேட்கலாம்.</span><span class="en">This is a general guide. Your lawyer may ask for more.</span></p><ul class="docs"><li><b><span class="ta">பட்டா</span><span class="en">Patta</span></b><span><span class="ta">நிலம் யார் பெயரில் உள்ளது என்பதைக் காட்டும்.</span><span class="en">Shows in whose name the land is recorded.</span></span></li><li><b><span class="ta">சிட்டா / அடங்கல்</span><span class="en">Chitta / Adangal</span></b><span><span class="ta">நிலத்தின் வகை, பயன்பாடு, பரப்பளவு விவரம்.</span><span class="en">Land type, use and extent details.</span></span></li><li><b><span class="ta">வில்லங்கச் சான்று (EC)</span><span class="en">Encumbrance Certificate (EC)</span></b><span><span class="ta">நிலத்தின் மீது கடன் அல்லது பிற பதிவுகள் உள்ளனவா என்பதைக் காட்டும்.</span><span class="en">Shows whether loans or other entries exist on the land.</span></span></li><li><b><span class="ta">FMB வரைபடம்</span><span class="en">FMB sketch</span></b><span><span class="ta">நிலத்தின் எல்லை மற்றும் அளவு.</span><span class="en">Boundary and measurement of the land.</span></span></li><li><b><span class="ta">தாய்ப் பத்திரம் (Parent documents)</span><span class="en">Parent documents</span></b><span><span class="ta">முந்தைய உரிமை மாற்றங்களின் சங்கிலி.</span><span class="en">The chain of earlier ownership transfers.</span></span></li><li><b><span class="ta">அங்கீகாரம் (Layout / DTCP / CMDA)</span><span class="en">Approval (Layout / DTCP / CMDA)</span></b><span><span class="ta">மனைப்பிரிவாக இருந்தால் அதற்கான ஒப்புதல் நிலை.</span><span class="en">Approval status, if the land is part of a layout.</span></span></li></ul></div></section><section class="alt-bg" id="enquiry"><div class="wrap">
+  <h2 class="sec" style="text-align:center"><span class="ta">இலவச ஆலோசனைக்கு விவரங்களைப் பகிருங்கள்</span><span class="en">Share your details for a free consultation</span></h2>
+  <p class="lead" style="text-align:center;margin-inline:auto"><span class="ta">நாங்கள் உங்களைத் தொடர்பு கொள்கிறோம்.</span><span class="en">We will get in touch with you.</span></p>
+  <form class="formbox" id="f" novalidate>
+    <label for="name"><span class="ta">பெயர் *</span><span class="en">Name *</span></label><input id="name" name="name" autocomplete="name" maxlength="100" required>
+    <div class="row2">
+      <div><label for="mobile"><span class="ta">மொபைல் எண் *</span><span class="en">Mobile number *</span></label><input id="mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" maxlength="15" required></div>
+      <div><label for="email"><span class="ta">மின்னஞ்சல் (விருப்பம்)</span><span class="en">Email (optional)</span></label><input id="email" name="email" type="email" autocomplete="email" maxlength="120"></div>
+    </div>
+    <label for="req"><span class="ta">உங்கள் நோக்கம் *</span><span class="en">Your purpose *</span></label>
+    <select id="req" name="req"><option value="Buyer" data-ta="நிலம் வாங்க" data-en="Buy land"></option><option value="Investor" data-ta="முதலீடு செய்ய" data-en="Invest"></option><option value="Seller" data-ta="நிலம் விற்க" data-en="Sell land"></option></select>
+    <div class="row2">
+      <div><label for="area"><span class="ta">விரும்பும் பகுதி</span><span class="en">Preferred area</span></label><select id="area" name="area"><option value="" data-ta="தேர்வு செய்யுங்கள்" data-en="Select"></option><option value="செங்கல்பட்டு" data-ta="செங்கல்பட்டு" data-en="Chengalpattu"></option><option value="காஞ்சிபுரம்" data-ta="காஞ்சிபுரம்" data-en="Kancheepuram"></option><option value="திருவள்ளூர்" data-ta="திருவள்ளூர்" data-en="Tiruvallur"></option><option value="சென்னை நகரம்" data-ta="சென்னை நகரம்" data-en="Chennai city"></option><option value="வேறு பகுதி" data-ta="வேறு பகுதி" data-en="Other area"></option></select></div>
+      <div><label for="budget"><span class="ta">பட்ஜெட்</span><span class="en">Budget</span></label><select id="budget" name="budget"><option value="" data-ta="தேர்வு செய்யுங்கள்" data-en="Select"></option><option value="₹10 லட்சத்துக்குக் கீழ்" data-ta="₹10 லட்சத்துக்குக் கீழ்" data-en="Under ₹10 lakh"></option><option value="₹10 – 25 லட்சம்" data-ta="₹10 – 25 லட்சம்" data-en="₹10 – 25 lakh"></option><option value="₹25 – 50 லட்சம்" data-ta="₹25 – 50 லட்சம்" data-en="₹25 – 50 lakh"></option><option value="₹50 லட்சம் – 1 கோடி" data-ta="₹50 லட்சம் – 1 கோடி" data-en="₹50 lakh – 1 crore"></option><option value="₹1 கோடிக்கு மேல்" data-ta="₹1 கோடிக்கு மேல்" data-en="Above ₹1 crore"></option></select></div>
+    </div>
+    <label for="msg"><span class="ta">கூடுதல் விவரம் (விருப்பம்)</span><span class="en">More details (optional)</span></label><textarea id="msg" name="msg" rows="3" maxlength="1200"></textarea>
+    <label class="chk" for="ok" style="font-weight:400;margin-top:14px"><input id="ok" type="checkbox"><span><span class="ta">Nilam360 என்னை அழைக்க அல்லது WhatsApp-ல் தொடர்பு கொள்ள சம்மதிக்கிறேன்.</span><span class="en">I agree that Nilam360 may call or WhatsApp me.</span> <a href="https://nilam360hub.github.io/Nilam360hub/privacy.html" target="_blank" rel="noopener"><span class="ta">தனியுரிமைக் கொள்கை</span><span class="en">Privacy policy</span></a></span></label>
+    <button class="send" id="go" type="submit"><span class="ta">விசாரணையை அனுப்பு</span><span class="en">Send enquiry</span></button>
+    <div id="out" class="msg" hidden role="status"></div>
+  </form>
+  <p class="note"><span class="ta">நேரடியாகப் பேச</span><span class="en">Talk to us directly</span>: <a href="tel:+917010880360">+91 70108 80360</a> &nbsp;|&nbsp; <a href="https://wa.me/917010880360" target="_blank" rel="noopener">WhatsApp</a></p>
+</div></section>
+<footer><div class="wrap">
+  <div><b style="color:#fff">NILAM360</b><br>Land · People · Capital · Opportunity</div>
+  <div><span class="ta">சொத்து விவரங்களை சுதந்திரமான நில முகவர்கள் வழங்குகின்றனர். அரசு இணையதளங்களில் கிடைத்த ஆவணங்களுடன் அவற்றை ஒப்பிட்டு, குறிப்பிட்ட தேதியில் பார்த்த நிலையை மட்டும் காட்டுகிறோம். இது சட்ட உத்தரவாதம் அல்ல; உரிமை அல்லது பட்டாவுக்கான சான்றும் அல்ல. வாங்கும் முன் உங்கள் சொந்த வழக்கறிஞரின் கருத்தைப் பெறுங்கள். நிலம்360 பெயரில் எந்த முகவருக்கும் முன்பணம் அல்லது கட்டணம் செலுத்த வேண்டாம்.</span><span class="en">Property details are provided by independent real estate agents. We compare them with documents available on government portals and show only the status seen on the stated date. This is not a legal guarantee or proof of title or patta. Please get a legal opinion from your own lawyer before buying. Do not pay any advance or fee to any agent in the name of Nilam360.</span></div>
+</div></footer>
+<script>
+(function(){
+  var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vbHl0YnZybW92Y2pwZ2twd2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5MzU0NDQsImV4cCI6MjEwNTUxMTQ0NH0.Owunw6rIowVvklWbf1wkfgHzyEvQxlNXrPg8wGtHSOU';
+  var URL_='https://nolytbvrmovcjpgkpwej.supabase.co/rest/v1/website_enquiries';
+  var M={
+    ta:{name:'பெயரை உள்ளிடவும்.',mobile:'சரியான மொபைல் எண்ணை உள்ளிடவும் (10 இலக்கம்).',consent:'தொடர்பு கொள்ள உங்கள் சம்மதத்தைக் குறிக்கவும்.',sending:'அனுப்புகிறது…',send:'விசாரணையை அனுப்பு',ok:'நன்றி! உங்கள் விசாரணை கிடைத்தது. எங்கள் குழு விரைவில் உங்களைத் தொடர்பு கொள்ளும்.',bad:'அனுப்ப முடியவில்லை. தயவுசெய்து +91 70108 80360 என்ற எண்ணில் அழையுங்கள்.',area:'பகுதி',budget:'பட்ஜெட்',phn:'10 இலக்க எண்',ph:'எ.கா. 2 கிரவுண்டு மனை, OMR பக்கம்'},
+    en:{name:'Please enter your name.',mobile:'Please enter a valid mobile number (10 digits).',consent:'Please tick the consent box so we can contact you.',sending:'Sending…',send:'Send enquiry',ok:'Thank you! We received your enquiry and will contact you soon.',bad:'Could not send. Please call +91 70108 80360.',area:'Area',budget:'Budget',phn:'10-digit number',ph:'e.g. 2 ground plot near OMR'}
+  };
+  var lang='ta';
+  try{var sv=localStorage.getItem('n360lang');if(sv==='en'||sv==='ta')lang=sv}catch(e){}
+  var f=document.getElementById('f'),out=document.getElementById('out'),go=document.getElementById('go');
+  function setLang(l){
+    lang=l;document.documentElement.lang=l;
+    document.querySelectorAll('option[data-ta]').forEach(function(o){o.textContent=o.getAttribute('data-'+l)});
+    document.getElementById('bta').setAttribute('aria-pressed',l==='ta');
+    document.getElementById('ben').setAttribute('aria-pressed',l==='en');
+    document.getElementById('mobile').placeholder=M[l].phn;
+    document.getElementById('msg').placeholder=M[l].ph;
+    document.title=l==='ta'?'Nilam360 – சென்னையைச் சுற்றி நிலம் வாங்க நினைப்பவர்களுக்காக':'Nilam360 – For those looking to buy land around Chennai';
+    try{localStorage.setItem('n360lang',l)}catch(e){}
+  }
+  document.getElementById('bta').onclick=function(){setLang('ta')};
+  document.getElementById('ben').onclick=function(){setLang('en')};
+  setLang(lang);
+  function show(t,ok){out.hidden=false;out.className='msg '+(ok?'ok':'bad');out.textContent=t}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var m=M[lang];
+    var name=f.name.value.trim(),mobile=f.mobile.value.trim();
+    if(name.length<2){show(m.name,false);return}
+    if(!/^[0-9+ -]{10,15}$/.test(mobile)){show(m.mobile,false);return}
+    if(!document.getElementById('ok').checked){show(m.consent,false);return}
+    var parts=[];
+    if(f.area.value)parts.push(M.ta.area+': '+f.area.value);
+    if(f.budget.value)parts.push(M.ta.budget+': '+f.budget.value);
+    if(f.msg.value.trim())parts.push(f.msg.value.trim());
+function srcTag(){try{var q=new URLSearchParams(location.search);var c=function(k){return (q.get(k)||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,30)};var t='Landing-ChennaiIT-'+lang.toUpperCase();var u=c('utm_source'),m=c('utm_medium'),g=c('utm_campaign'),n=c('utm_content');if(u)t+='|src='+u;if(m)t+='|med='+m;if(g)t+='|camp='+g;if(n)t+='|ad='+n;return t.slice(0,140)}catch(e){return 'Landing-ChennaiIT-'+lang.toUpperCase()}}
+        var body={name:name,mobile:mobile,requirement_type:f.req.value,location:f.area.value||null,budget:f.budget.value||null,
+      message:parts.join(' | ').slice(0,1500)||null,source:srcTag(),status:'New'};
+    if(f.email.value.trim())body.email=f.email.value.trim();
+    go.disabled=true;go.textContent=m.sending;
+    fetch(URL_,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(body)})
+    .then(function(r){if(!r.ok)throw new Error(r.status);f.reset();show(m.ok,true)})
+    .catch(function(){show(m.bad,false)})
+    .finally(function(){go.disabled=false;go.textContent=m.send});
+  });
+})();
+</script>
+</body>
+</html>
