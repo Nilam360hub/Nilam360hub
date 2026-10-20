@@ -577,6 +577,7 @@
   .ef-consent{display:flex !important;gap:10px;align-items:flex-start;font-weight:500 !important;font-size:13px !important;margin-bottom:18px !important;}
   .ef-consent input{width:auto !important;margin-top:3px;}
   [data-roles].is-hidden{display:none;}
+  [data-roles].is-hidden,.ef-consent.is-hidden{display:none !important;}
   .prop-card .prop-price a{cursor:pointer;}
   .admin-link{opacity:.55;}
   .admin-link:hover{opacity:1;color:#fff;}
@@ -1965,6 +1966,50 @@ html[lang="en"] .hero .gold-tagline .gt-main{white-space:normal!important;text-w
 
 /* "ஒரே தளத்தில்" in light logo-green */
 html:not([data-theme="gold"]) .hero h1 em{color:#b4e03a!important;-webkit-text-fill-color:#b4e03a!important}
+
+/* ===== hero (blue theme): tagline removed, sub-line bigger, right under "ஒரே தளத்தில்" ===== */
+html:not([data-theme="gold"]) .hero p.bl-tagline{display:none!important}
+html:not([data-theme="gold"]) .hero p.gold-tagline{margin-top:6px!important;margin-bottom:4px!important}
+html:not([data-theme="gold"]) .hero .gold-tagline .gt-main{font-size:clamp(15px,4.4vw,22px)!important;line-height:1.55!important;font-weight:700!important}
+html:not([data-theme="gold"]) .hero .gold-tagline .wmk-in{width:4.2em!important;vertical-align:-.12em!important}
+@media(max-width:1024px){html:not([data-theme="gold"]) .hero p.gold-tagline{margin-top:2px!important}}
+/* ===== app-style property cards ===== */
+.prop-card.app-card{border-radius:20px!important;border:1px solid #d6e5f4!important;border-top:1px solid #d6e5f4!important;background:#fff}
+.app-card .app-ph{height:120px!important;border-radius:0;padding:12px!important;align-items:flex-end;justify-content:flex-start}
+.app-card .app-ph.g-green{background:linear-gradient(135deg,#5b9a4c 0%,#2f7a3c 55%,#1f5a2e 100%)!important}
+.app-card .app-ph.g-blue{background:linear-gradient(135deg,#4b98d4 0%,#2b6b9e 55%,#1b3f66 100%)!important}
+.app-card .app-ph.g-navy{background:linear-gradient(135deg,#2b5f9e 0%,#123a63 100%)!important}
+.app-card .app-ph .app-chip{position:absolute;top:12px;left:12px;background:#fff!important;color:#1c5a24!important;font-weight:800!important;font-size:12.5px!important;padding:6px 12px!important;border-radius:999px!important}
+.app-card .app-ph .app-id{position:relative;z-index:1;color:#fff;font-weight:800;font-size:13px;letter-spacing:.2px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.app-card .prop-star{top:10px!important;right:10px!important;width:34px!important;height:34px!important;font-size:19px!important}
+.app-card .app-body{padding:14px 14px 12px!important;background:#f1f5f9}
+.app-card .app-r1{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.app-card .app-price b{font-size:19px;font-weight:900;color:#0a3a7a}
+.app-card .app-ext{font-size:13px;color:#5c6773;margin-left:6px;font-weight:600}
+.app-card .app-ppn .price-note{font-size:12.5px;color:#5c6773}
+.app-card .app-type{font-size:16px;font-weight:800;color:#0b2f5e;margin-top:6px}
+.app-card .app-loc{display:flex;gap:6px;align-items:flex-start;font-size:12.5px;color:#46586b;margin-top:6px}
+.app-card .app-loc svg{flex:0 0 14px;margin-top:2px}
+.app-card .posted-meta{font-size:11px;text-align:right}
+/* ===== "மேலும் பார்க்க" as a plain right-aligned text link ===== */
+.vm-wrap{text-align:right!important;margin:10px 4px 0!important}
+.vm-wrap .btn,.sec-sale .vm-wrap #propViewMoreBtn,.vm-wrap #propViewMoreBtn,.vm-wrap #demViewMoreBtn,.vm-wrap #layoutViewMoreBtn{background:none!important;border:0!important;box-shadow:none!important;min-width:0!important;padding:6px 2px!important;border-radius:0!important;color:#0a4a9a!important;-webkit-text-fill-color:#0a4a9a!important;font-weight:800!important;font-size:15px!important;text-decoration:underline;text-underline-offset:4px}
+.vm-wrap .btn::after{content:" \203A"!important}
+
+@media(min-width:901px){.prop-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}}
+
+/* ===== modern hero text block (blue theme) ===== */
+html:not([data-theme="gold"]) .hero h1{margin-bottom:0!important}
+html:not([data-theme="gold"]) .hero p.gold-tagline{margin:18px 0 8px!important;padding:2px 0 2px 20px!important;border:0!important;max-width:30em;position:relative}
+html:not([data-theme="gold"]) .hero p.gold-tagline::before{content:""!important;display:block!important;position:absolute;left:3px;top:calc(clamp(13px,3.7vw,17px) * .875 - 2px);width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+html:not([data-theme="gold"]) .hero .gold-tagline .gt-main{font-size:clamp(13px,3.7vw,17px)!important;line-height:1.75!important;font-weight:600!important;letter-spacing:.005em!important;color:rgba(255,255,255,.96)!important;-webkit-text-fill-color:rgba(255,255,255,.96)!important}
+html:not([data-theme="gold"]) .hero .gold-tagline .wmk-in{width:4em!important}
+@media(max-width:1024px){html:not([data-theme="gold"]) .hero p.gold-tagline{margin:16px 0 10px!important}}
+
+/* never cut: allow wrapping, balanced lines */
+html:not([data-theme="gold"]) .hero p.gold-tagline{max-width:100%!important;padding-right:6px!important;box-sizing:border-box}
+html:not([data-theme="gold"]) .hero .gold-tagline .gt-main{white-space:normal!important;overflow-wrap:anywhere;text-wrap:balance;font-size:clamp(12.5px,3.5vw,17px)!important}
+html:not([data-theme="gold"]) .hero .gold-tagline .gt-main br{display:inline}
 </style>
 </head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="wmNavy" gradientUnits="userSpaceOnUse" x1="0" y1="-700" x2="0" y2="0"><stop offset="0" stop-color="#0059a3"/><stop offset=".55" stop-color="#00437c"/><stop offset="1" stop-color="#002b55"/></linearGradient><linearGradient id="wmGreen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="213"><stop offset="0" stop-color="#86c108"/><stop offset=".5" stop-color="#4f9b0e"/><stop offset="1" stop-color="#13670f"/></linearGradient><linearGradient id="wmLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#16521e"/><stop offset="1" stop-color="#79b72b"/></linearGradient></defs></svg>
@@ -2082,7 +2127,7 @@ html:not([data-theme="gold"]) .hero h1 em{color:#b4e03a!important;-webkit-text-f
       <div class="hero-actions hero-four">
         <a href="#properties" class="h4" data-role="Buyer"><span class="h4i"><img src="img/ic_buy.png" alt="" width="104" height="104" loading="eager"></span><span class="h4t"><span data-ta="நிலங்கள் வாங்க" data-en="Buy Land">நிலங்கள் வாங்க</span></span><em class="h4a" aria-hidden="true">&rarr;</em></a>
         <a href="#contact" class="h4" data-role="Seller"><span class="h4i"><img src="img/ic_sell.png" alt="" width="104" height="104" loading="eager"></span><span class="h4t"><span data-ta="நிலங்கள் விற்க" data-en="Sell Land">நிலங்கள் விற்க</span></span><em class="h4a" aria-hidden="true">&rarr;</em></a>
-        <a href="#contact" class="h4" data-role="Buyer"><span class="h4i"><img src="img/ic_need.png" alt="" width="104" height="104" loading="eager"></span><span class="h4t"><span data-ta="நிலம் தேவை" data-en="Land Wanted">நிலம் தேவை</span></span><em class="h4a" aria-hidden="true">&rarr;</em></a>
+        <a href="#contact" class="h4" data-role="Buyer" data-req="1"><span class="h4i"><img src="img/ic_need.png" alt="" width="104" height="104" loading="eager"></span><span class="h4t"><span data-ta="நிலம் தேவை" data-en="Land Wanted">நிலம் தேவை</span></span><em class="h4a" aria-hidden="true">&rarr;</em></a>
         <a href="#contact" class="h4" data-role="Broker"><span class="h4i"><img src="img/ic_member_cut.png" alt="" width="104" height="104" loading="eager"></span><span class="h4t"><span data-ta="நில முகவர்" data-en="Land Agent">நில முகவர்</span></span><em class="h4a" aria-hidden="true">&rarr;</em></a>
       </div>
       
@@ -2232,7 +2277,7 @@ html:not([data-theme="gold"]) .hero h1 em{color:#b4e03a!important;-webkit-text-f
       <div class="wb-kick" data-ta="உங்களுக்கு நிலம் தேவையா?" data-en="Looking for land?">உங்களுக்கு நிலம் தேவையா?</div>
       <h3 data-ta="உங்கள் தேவையை இங்கு பதிவு செய்யுங்கள்" data-en="Post your requirement here">உங்கள் தேவையை இங்கு பதிவு செய்யுங்கள்</h3>
       <p class="wb-note wb-in"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-ta="பெயர், தொலைபேசி எண் வெளியிடப்படாது. நீங்கள் ஒப்புதல் தந்த தேவை மட்டும், சரிபார்த்த பின் 60 நாட்கள் காட்டப்படும்." data-en="Your name and phone number are never shown. Only requirements you approve are shown for 60 days after verification.">பெயர், தொலைபேசி எண் வெளியிடப்படாது. நீங்கள் ஒப்புதல் தந்த தேவை மட்டும், சரிபார்த்த பின் 60 நாட்கள் காட்டப்படும்.</span></p>
-      <a href="#contact" class="btn btn-green" data-role="Buyer" data-ta="தேவையைப் பதிவு செய்ய &rarr;" data-en="Post your requirement &rarr;">தேவையைப் பதிவு செய்ய &rarr;</a>
+      <a href="#contact" class="btn btn-green" data-role="Buyer" data-req="1" data-ta="தேவையைப் பதிவு செய்ய &rarr;" data-en="Post your requirement &rarr;">தேவையைப் பதிவு செய்ய &rarr;</a>
     </div>
     <div class="want-box want-sell">
       <div class="wb-kick" data-ta="நிலம் விற்க வேண்டுமா?" data-en="Want to sell land?">நிலம் விற்க வேண்டுமா?</div>
@@ -2341,7 +2386,7 @@ html:not([data-theme="gold"]) .hero h1 em{color:#b4e03a!important;-webkit-text-f
         <label for="efMessage" data-ta="கூடுதல் குறிப்பு" data-en="Additional Note">கூடுதல் குறிப்பு</label>
         <textarea id="efMessage" name="message" rows="3" maxlength="1500" placeholder="உங்கள் தேவையை சுருக்கமாக எழுதவும்" data-ta-ph="உங்கள் தேவையை சுருக்கமாக எழுதவும்" data-en-ph="Briefly describe your requirement"></textarea>
       </div>
-      <label class="ef-consent" data-roles="Buyer Investor Bulk"><input type="checkbox" name="public_consent" value="1"> <span data-ta="என் தேவையை (நில வகை, இடம், பட்ஜெட் மட்டும்) பெயர் / மொபைல் எண் இல்லாமல் இணையதளத்தில் காட்டலாம் (விருப்பம்)" data-en="You may show my requirement (land type, area, budget only) on the website without my name or number (optional)">என் தேவையை (நில வகை, இடம், பட்ஜெட் மட்டும்) பெயர் / மொபைல் எண் இல்லாமல் இணையதளத்தில் காட்டலாம் (விருப்பம்)</span></label>
+      <label class="ef-consent" data-roles="Buyer Investor Bulk" data-needreq="1"><input type="checkbox" name="public_consent" value="1"> <span data-ta="என் தேவையை (நில வகை, இடம், பட்ஜெட் மட்டும்) பெயர் / மொபைல் எண் இல்லாமல் இணையதளத்தில் காட்டலாம் (விருப்பம்)" data-en="You may show my requirement (land type, area, budget only) on the website without my name or number (optional)">என் தேவையை (நில வகை, இடம், பட்ஜெட் மட்டும்) பெயர் / மொபைல் எண் இல்லாமல் இணையதளத்தில் காட்டலாம் (விருப்பம்)</span></label>
       <!-- spam trap: மனிதர்களுக்கு தெரியாது -->
       <div class="ef-hp" aria-hidden="true"><label>Website</label><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
       <label class="ef-consent"><input type="checkbox" name="consent" required> <span data-ta="என் விவரங்களை Nilam360 குழு என்னைத் தொடர்பு கொள்ள மட்டும் பயன்படுத்த சம்மதிக்கிறேன்." data-en="I agree that Nilam360 will use my details only to contact me.">என் விவரங்களை Nilam360 குழு என்னைத் தொடர்பு கொள்ள மட்டும் பயன்படுத்த சம்மதிக்கிறேன்.</span> <span>*</span></label>
@@ -2923,13 +2968,17 @@ function phArt(k) {
     var distanceBadge = (p.__distanceKm != null) ? ('<span class="badge" style="background:var(--navy);color:#fff;margin-left:6px;">&#128205; ' + p.__distanceKm.toFixed(1) + ' km</span>') : '';
     var card = document.createElement('div');
     card.className = 'prop-card';
+    var pk = phKey(p), gcls = (pk === 'agri') ? 'g-blue' : (pk === 'comm' ? 'g-navy' : 'g-green');
+    var ppn = priceNote(p);
+    card.classList.add('app-card');
     card.innerHTML =
-      '<div class="prop-photo ' + (photo ? '' : 'ph-' + phKey(p)) + '"' + photoStyle + '>' + (photo ? '' : phArt(phKey(p)) + phTag(phKey(p))) + badge + highlightBadge + distanceBadge + '</div>' +
-      '<div class="prop-body">' +
-        '<div class="prop-loc">' + esc(loc || T('locationNA')) + (survey ? ' &middot; ' + esc(survey) : '') + (mapLink ? ' &middot; ' + mapLink : '') + '</div>' +
-        '<h3>' + esc(extent || '') + (typeLabel ? ' &mdash; ' + esc(typeLabel) : '') + '</h3>' +
-        '<div class="prop-specs">' + specs + '</div>' + checksOf(p) + hlList(p, false) +
-        '<div class="prop-price"><b>' + price + priceNote(p) + '</b>' + postedMeta(p) + '</div>' +
+      '<div class="prop-photo app-ph ' + (photo ? 'has-photo' : gcls) + '"' + photoStyle + '>' + '<span class="badge app-chip">' + esc(typeLabel || p.property_status || 'Listed') + '</span>' + highlightBadge + distanceBadge + '<span class="app-id">' + esc(p.property_id || '') + '</span></div>' +
+      '<div class="prop-body app-body">' +
+        '<div class="app-r1"><div class="app-price"><b>' + price + '</b>' + (extent ? '<span class="app-ext">&middot; ' + esc(extent) + '</span>' : '') + '</div>' + postedMeta(p) + '</div>' +
+        (ppn ? '<div class="app-ppn">' + ppn + '</div>' : '') +
+        '<div class="app-type">' + esc(typeLabel || '') + '</div>' +
+        '<div class="app-loc"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" fill="#d93f3f"/></svg><span>' + esc(loc || T('locationNA')) + (mapLink ? ' &middot; ' + mapLink : '') + '</span></div>' +
+        checksOf(p) +
         '<div class="prop-acts">' + waBtn + '<a href="#contact" data-pid="' + esc(p.property_id) + '">' + T('enquireArrow') + '</a></div>' +
       '</div>';
     var starOn = propFav.indexOf(p.property_id) >= 0;
@@ -3349,6 +3398,7 @@ function phArt(k) {
   if (configured && sb) { sb.rpc('public_requirements').then(function (r) { reqList = ((r && r.data) || []).slice().sort(function (a, b) { return (String(b.posted_on).localeCompare(String(a.posted_on))) || String(b.req_id).localeCompare(String(a.req_id)); }); var se = document.getElementById('statDemand'); if (se) se.textContent = reqList.length; renderDemand(); }); }
 
   // ---------- "View More" — show the first few cards, reveal the rest on click ----------
+  function gridCols(id) { try { var g = document.getElementById(id); var n = getComputedStyle(g).gridTemplateColumns.split(' ').filter(function (x) { return x && x !== 'none'; }).length; return Math.max(1, n); } catch (e) { return 2; } }
   function setupViewMore(gridId, btnId, minVisible) {
     var grid = document.getElementById(gridId);
     var btn = document.getElementById(btnId);
@@ -3409,7 +3459,7 @@ function phArt(k) {
       return;
     }
     list.slice(0, 12).forEach(function (p, i) { grid.appendChild(cardHTML(p, i)); });
-    setupViewMore('propGrid', 'propViewMoreBtn', (window.innerWidth<=1000?2:3));
+    setupViewMore('propGrid', 'propViewMoreBtn', 2 * gridCols('propGrid'));
   }
 
   // ---------- Bulk Layouts showcase: group live listings by layout_name ----------
@@ -3938,21 +3988,23 @@ function phArt(k) {
   var efStatus = document.getElementById('efStatus');
   var efBtn = document.getElementById('efSubmitBtn');
   var roleSel = document.getElementById('efRole');
+  var reqMode = false;   // true only when the visitor came to POST a requirement
 
   function applyRole() {
     var r = roleSel.value;
     efForm.querySelectorAll('[data-roles]').forEach(function (el) {
       var on = el.getAttribute('data-roles').split(' ').indexOf(r) !== -1;
+      if (on && el.hasAttribute('data-needreq') && !(reqMode || r === 'Bulk')) on = false;   // "show my requirement publicly" only when posting a requirement
       el.classList.toggle('is-hidden', !on);
       el.querySelectorAll('input,select,textarea').forEach(function (i) { i.disabled = !on; });
     });
   }
-  roleSel.addEventListener('change', applyRole);
+  roleSel.addEventListener('change', function () { reqMode = false; applyRole(); });
   applyRole();
 
   document.querySelectorAll('[data-role]').forEach(function (a) {
     a.addEventListener('click', function () {
-      roleSel.value = a.getAttribute('data-role'); applyRole();
+      roleSel.value = a.getAttribute('data-role'); reqMode = a.hasAttribute('data-req'); applyRole();
       var note = a.getAttribute('data-note');
       if (note) { efForm.elements['message'].value = (LANG === 'en' ? a.getAttribute('data-note-en') : note) || note; }
     });
@@ -3998,7 +4050,7 @@ function phArt(k) {
   efForm.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!efForm.checkValidity()) { efForm.reportValidity(); return; }
-    if (efForm.elements['website'].value) { say(T('botThanks'), true); efForm.reset(); applyRole(); return; } // bot
+    if (efForm.elements['website'].value) { say(T('botThanks'), true); efForm.reset(); reqMode = false; applyRole(); return; } // bot
 
     if (!configured) { say(T('notConfigured'), false); return; }
 
@@ -4034,7 +4086,7 @@ function phArt(k) {
       }
       try { localStorage.setItem('nilam_last_submit', String(Date.now())); } catch (x) {}
       say(T('submitOk'), true);
-      efForm.reset(); applyRole();
+      efForm.reset(); reqMode = false; applyRole();
       fillTaluks(fTal, '', T('pickDistrictFirst'), '');
     });
   });

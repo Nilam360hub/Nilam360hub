@@ -131,6 +131,7 @@
     { n: 'id', t: 'num', pk: 1, ro: 1 }, { n: 'submitted_at', t: 'ts', ro: 1 },
     { n: 'requirement_type', t: 'enum', e: ['Buyer', 'Seller', 'Investor', 'Broker', 'Other'] },
     { n: 'status', t: 'enum', e: ['New', 'Reviewed', 'Converted', 'Spam'] },
+    { n: 'public_status', t: 'enum', e: ['None', 'Pending', 'Approved', 'Hidden'] },
     { n: 'name', t: 'text' }, { n: 'mobile', t: 'text' }, { n: 'email', t: 'text' },
     { n: 'district', t: 'text' }, { n: 'taluk', t: 'text' }, { n: 'village', t: 'text' }, { n: 'survey_no', t: 'text' },
     { n: 'extent', t: 'num' }, { n: 'extent_unit', t: 'text' }, { n: 'asking_price', t: 'num' },
@@ -142,6 +143,7 @@
   var TABS = [
     { k: 'dashboard', label: '📊 Dashboard' },
     { k: 'backup', label: '⬇ மொத்த Backup (CSV)' },
+    { k: 'theme', label: '🎨 வெப்சைட் தீம்' },
     { k: 'website_enquiries', label: '📥 விசாரணைகள் / Enquiries', pk: 'id', order: 'submitted_at', filter: 'status', noAdd: 1,
       show: ['submitted_at', 'requirement_type', 'name', 'mobile', 'district', 'taluk', 'status'] },
     { sep: 1 },
@@ -149,7 +151,7 @@
       show: ['property_id', 'district', 'taluk', 'village', 'survey_no', 'extent', 'extent_unit', 'property_type', 'asking_price', 'property_status', 'owner_auth_method', 'owner_auth_status', 'owner_source', 'litigation_flag'] },
     { k: 'owners', label: 'உரிமையாளர்கள் / Owners', pk: 'owner_id', prefix: 'OWN', filter: 'status',
       show: ['owner_id', 'owner_entity_name', 'mobile', 'village', 'taluk', 'district', 'kyc_status', 'status'] },
-    { k: 'brokers', label: 'நில முகவர்கள் / Real Estate Agents', pk: 'broker_id', prefix: 'BRK', filter: 'status',
+    { k: 'brokers', label: 'நில முகவர்கள் / Real Estate Agents', pk: 'broker_id', prefix: 'AGT', filter: 'status',
       show: ['broker_id', 'full_name', 'business_agency', 'mobile', 'area', 'kyc_status', 'status'] },
     { k: 'buyers', label: 'வாங்குபவர்கள் / Buyers', pk: 'buyer_id', prefix: 'BUY', filter: 'lead_status',
       show: ['buyer_id', 'full_name_entity', 'mobile', 'preferred_district', 'preferred_taluk', 'budget_min', 'budget_max', 'property_type', 'lead_status'] },
@@ -218,7 +220,7 @@
 
   // ---------- sidebar ----------
   var TABCOL = { dashboard: '#123a63', properties: '#3f9142', owners: '#00796b', brokers: '#c8962d', buyers: '#1f5fa8', investors: '#7b1fa2', requirements: '#3f51b5', matching: '#ad1457',
-    transactions: '#0a2542', property_brokers: '#7d93aa', documents: '#00838f', verification_log: '#2e7d32', activity_log: '#6d4c41', commission_log: '#b8860b', website_enquiries: '#e67e22', backup: '#5c6773' };
+    transactions: '#0a2542', property_brokers: '#7d93aa', documents: '#00838f', verification_log: '#2e7d32', activity_log: '#6d4c41', commission_log: '#b8860b', website_enquiries: '#e67e22', backup: '#5c6773', theme: '#c8962d' };
   function tabColor(k) { return TABCOL[k] || '#123a63'; }
   var counts = {};
   function buildSide() {
@@ -241,6 +243,7 @@
     document.documentElement.style.setProperty('--tc', tabColor(k));
     if (k === 'dashboard') return renderDashboard();
     if (k === 'backup') return renderBackup();
+    if (k === 'theme') return renderTheme();
     $('#main').innerHTML = '<div class="empty">ஏற்றுகிறது...</div>';
     var cfg = TAB[k], order = cfg.order || 'created_at';
     sb.from(k).select('*').order(order, { ascending: false }).range(0, 999).then(function (r) {
@@ -368,6 +371,43 @@
     a.href = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\n')], { type: 'text/csv;charset=utf-8' }));
     a.download = cur + '_' + new Date().toISOString().slice(0, 10) + '.csv'; a.click();
     logExport(cur, list.length).then(function () { lastDownload(cur).then(function (d) { var e = $('#lastDl'); if (e && d) e.textContent = 'கடைசி பதிவிறக்கம்: ' + fmtDT(d.exported_at); }); });
+  }
+
+
+  // ---------- website theme (blue / gold / festival schedule) ----------
+  function renderTheme() {
+    $('#main').innerHTML = '<div class="empty">ஏற்றுகிறது...</div>';
+    sb.from('site_theme').select('*').eq('id', 1).maybeSingle().then(function (r) {
+      if (r.error) { $('#main').innerHTML = '<div class="empty">பிழை: ' + esc(r.error.message) + '</div>'; return; }
+      var t = r.data || { mode: 'blue' };
+      var opt = function (v, ic, ti, de) {
+        return '<label style="display:block;border:2px solid ' + (t.mode === v ? '#123a63' : '#dfe5ec') + ';border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fff;cursor:pointer">' +
+          '<input type="radio" name="tm" value="' + v + '"' + (t.mode === v ? ' checked' : '') + ' style="margin-right:8px"><b>' + ic + ' ' + ti + '</b><div style="color:#5c6773;font-size:13px;margin:4px 0 0 24px">' + de + '</div></label>';
+      };
+      $('#main').innerHTML = '<div class="bar"><h2>🎨 வெப்சைட் தீம்</h2></div>' +
+        '<div class="tablewrap" style="padding:18px;max-width:640px"><p style="margin:0 0 12px">பொதுமக்கள் பார்க்கும் வெப்சைட் எந்த நிறத்தில் தெரிய வேண்டும் என்பதை இங்கே தேர்வு செய்யுங்கள்.</p>' +
+        opt('blue', '🔵', 'நீலம் / வெள்ளை (இயல்பு)', 'எப்போதும் நீல நிற தீம் காட்டும்.') +
+        opt('gold', '🟡', 'தங்கம் / இருண்ட', 'எப்போதும் தங்க நிற தீம் காட்டும்.') +
+        opt('schedule', '🎉', 'பண்டிகை நேரம்', 'கொடுத்த தேதிகளில் மட்டும் தங்கம்; மற்ற நாட்களில் நீலம்.') +
+        '<div id="tmSch" style="margin:4px 0 14px 24px;display:' + (t.mode === 'schedule' ? 'block' : 'none') + '">' +
+        '<div class="fld"><label>பண்டிகை பெயர்</label><input id="tmName" value="' + esc(t.festival_name || '') + '" placeholder="எ.கா. தீபாவளி"></div>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><div><label style="font-size:13px">தொடக்கம்</label><br><input type="date" id="tmFrom" value="' + esc(t.festival_from || '') + '"></div>' +
+        '<div><label style="font-size:13px">முடிவு</label><br><input type="date" id="tmTo" value="' + esc(t.festival_to || '') + '"></div></div></div>' +
+        '<button class="btn" id="tmSave">சேமி</button> <span id="tmMsg" style="margin-left:10px;font-size:13px"></span>' +
+        '<p style="color:#5c6773;font-size:12px;margin:14px 0 0">சேமித்த பின் வெப்சைட்டில் மாற்றம் தெரிய சில நிமிடங்கள் ஆகலாம் (பக்கத்தை Refresh செய்யவும்). தேதிகள் இந்திய நேரப்படி கணக்கிடப்படும்.</p></div>';
+      var tg = function () { var m = document.querySelector('input[name=tm]:checked').value; $('#tmSch').style.display = m === 'schedule' ? 'block' : 'none'; };
+      document.querySelectorAll('input[name=tm]').forEach(function (i) { i.addEventListener('change', tg); });
+      $('#tmSave').addEventListener('click', function () {
+        var m = document.querySelector('input[name=tm]:checked').value, msg = $('#tmMsg');
+        var f = $('#tmFrom').value || null, to = $('#tmTo').value || null;
+        if (m === 'schedule' && (!f || !to || to < f)) { msg.style.color = '#c0392b'; msg.textContent = 'சரியான தொடக்க / முடிவு தேதிகளை உள்ளிடவும்.'; return; }
+        msg.style.color = '#5c6773'; msg.textContent = 'சேமிக்கிறது...';
+        sb.rpc('set_site_theme', { p_mode: m, p_name: m === 'schedule' ? $('#tmName').value.trim() : '', p_from: m === 'schedule' ? f : null, p_to: m === 'schedule' ? to : null }).then(function (x) {
+          if (x.error) { msg.style.color = '#c0392b'; msg.textContent = 'பிழை: ' + x.error.message; return; }
+          msg.style.color = '#2e7d32'; msg.textContent = '✔ சேமிக்கப்பட்டது'; renderTheme();
+        });
+      });
+    });
   }
 
   // ---------- export log + full backup ----------
