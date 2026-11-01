@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://nilam360hub.github.io/Nilam360hub/sitemap.xml
+Sitemap: https://nilam360.co.in/sitemap.xml
