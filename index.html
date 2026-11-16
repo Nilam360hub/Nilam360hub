@@ -2180,6 +2180,21 @@ html body #heroSearchForm .sb-tools .map-btn svg{width:22px!important;height:22p
 html body #heroSearchForm .sb-tools .map-btn span{font-size:13px!important;white-space:nowrap!important}
 }
 </style>
+<style>
+/* final fix 2: size by screen width so phone font-scale cannot overflow */
+@media(max-width:699px){
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html body #heroSearchForm .sb-tools{grid-template-columns:minmax(0,1.5fr) minmax(0,1.3fr) minmax(0,.85fr)!important;gap:1.5vw!important}
+html body #heroSearchForm .sb-tools>*{min-width:0!important}
+html body #heroSearchForm .sb-tools .pt-pill{padding:0 1.6vw!important;gap:1.2vw!important}
+html body #heroSearchForm .sb-tools .pt-pill b{font-size:3.2vw!important}
+html body #heroSearchForm .sb-tools .pt-pill em{font-size:2.7vw!important;padding:.8vw 1.7vw!important;min-width:0!important}
+html body #heroSearchForm .sb-tools .pt-pill svg{width:3.9vw!important;height:3.9vw!important}
+html body #heroSearchForm .sb-tools .pt-sort em{max-width:none!important}
+html body #heroSearchForm .sb-tools .map-btn svg{width:5.4vw!important;height:5.4vw!important}
+html body #heroSearchForm .sb-tools .map-btn span{font-size:3.2vw!important}
+}
+</style>
 </head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="wmNavy" gradientUnits="userSpaceOnUse" x1="0" y1="-700" x2="0" y2="0"><stop offset="0" stop-color="#0059a3"/><stop offset=".55" stop-color="#00437c"/><stop offset="1" stop-color="#002b55"/></linearGradient><linearGradient id="wmGreen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="213"><stop offset="0" stop-color="#86c108"/><stop offset=".5" stop-color="#4f9b0e"/><stop offset="1" stop-color="#13670f"/></linearGradient><linearGradient id="wmLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#16521e"/><stop offset="1" stop-color="#79b72b"/></linearGradient></defs></svg>
 
