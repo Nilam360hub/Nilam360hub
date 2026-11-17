@@ -2199,7 +2199,6 @@ html body #heroSearchForm .sb-tools .map-btn span{font-size:3.2vw!important}
 @media (prefers-reduced-motion:reduce){</style>
 <style>header .brand-sub{display:block!important;font-size:7.6px!important;letter-spacing:.14em!important;font-weight:600!important;color:#083878!important;margin-top:-4px!important;line-height:1.1!important;white-space:nowrap!important;text-align:center!important}
 header .brand>span{display:flex!important;flex-direction:column!important;align-items:stretch!important}</style>
-<style>@media(max-width:700px){html[lang="en"] .hero h1 em{white-space:nowrap!important;font-size:min(.92em,calc((100vw - 64px)/12.4))!important}}</style>
 <style>.hero-logo-card .logo-glow img,.hero-logo-card img.lg{width:min(190px,62%)!important}.hero-logo-card .hero-tagline-sm{color:#083878!important}</style>
 <style>.sb-title h2,.dem-top h2{color:#0a3a7a!important}</style>
 </head>
@@ -5177,6 +5176,16 @@ document.addEventListener('click',function(){setTimeout(function(){var o=documen
 })();
 </script>
 <style>@media(min-width:701px) and (max-width:1100px){html body div.hero-logo-card .stat-grid{display:grid!important}html body div.hero-logo-card .stat-grid>div:not(.stat-tap){display:none!important}html body div.hero-logo-card{padding:20px 18px 20px!important}}</style>
-<style>@media(min-width:701px){html[lang="en"] .hero h1 em{white-space:normal!important}}</style>
+<style>.hero h1 em{white-space:nowrap!important}</style>
+<script>(function(){var h=document.querySelector('.hero h1'),e=h&&h.querySelector('em');if(!e)return;
+function fit(){e.style.removeProperty('font-size');var base=parseFloat(getComputedStyle(e).fontSize)||40,t=base*.86;e.style.setProperty('font-size',t+'px','important');
+var hr=h.getBoundingClientRect(),av=hr.width,c=document.querySelector('.hero-logo-card');
+if(c&&getComputedStyle(c).display!=='none'){var cr=c.getBoundingClientRect();if(cr.top<hr.bottom&&cr.bottom>hr.top&&cr.left>hr.left)av=Math.min(av,cr.left-hr.left-24)}
+var rg=document.createRange();rg.selectNodeContents(e);var w=rg.getBoundingClientRect().width;if(w>av&&w>0)e.style.setProperty('font-size',(t*av/w*.98)+'px','important')}
+var tm;function sch(){clearTimeout(tm);tm=setTimeout(fit,60)}
+window.addEventListener('load',function(){fit();setTimeout(fit,600);setTimeout(fit,1800)});window.addEventListener('resize',sch);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+new MutationObserver(sch).observe(h,{childList:true,subtree:true,characterData:true});
+new MutationObserver(sch).observe(document.documentElement,{attributes:true,attributeFilter:['lang']})})();</script>
 </body>
 </html>
