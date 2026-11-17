@@ -2195,8 +2195,19 @@ html body #heroSearchForm .sb-tools .map-btn svg{width:5.4vw!important;height:5.
 html body #heroSearchForm .sb-tools .map-btn span{font-size:3.2vw!important}
 }
 </style>
+<style id="introCss">
+#introSplash{position:fixed;inset:0;z-index:99999;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .5s ease}
+#introSplash.out{opacity:0;pointer-events:none}
+#introSplash img{width:min(86vw,520px);height:auto;display:block}
+@media (prefers-reduced-motion:reduce){#introSplash{display:none}}
+</style>
 </head>
-<body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="wmNavy" gradientUnits="userSpaceOnUse" x1="0" y1="-700" x2="0" y2="0"><stop offset="0" stop-color="#0059a3"/><stop offset=".55" stop-color="#00437c"/><stop offset="1" stop-color="#002b55"/></linearGradient><linearGradient id="wmGreen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="213"><stop offset="0" stop-color="#86c108"/><stop offset=".5" stop-color="#4f9b0e"/><stop offset="1" stop-color="#13670f"/></linearGradient><linearGradient id="wmLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#16521e"/><stop offset="1" stop-color="#79b72b"/></linearGradient></defs></svg>
+<body><div id="introSplash" aria-hidden="true"><img id="introImg" src="intro.webp" alt=""></div>
+<script>(function(){var el=document.getElementById('introSplash');if(!el)return;var seen=false;try{seen=sessionStorage.getItem('nl_intro')==='1'}catch(e){}
+function done(){if(el.classList.contains('out'))return;el.classList.add('out');try{sessionStorage.setItem('nl_intro','1')}catch(e){}setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},600)}
+if(seen){if(el.parentNode)el.parentNode.removeChild(el);return}
+var img=document.getElementById('introImg');img.addEventListener('load',function(){setTimeout(done,5300)});img.addEventListener('error',done);
+el.addEventListener('click',done);setTimeout(done,9000)})();</script><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="wmNavy" gradientUnits="userSpaceOnUse" x1="0" y1="-700" x2="0" y2="0"><stop offset="0" stop-color="#0059a3"/><stop offset=".55" stop-color="#00437c"/><stop offset="1" stop-color="#002b55"/></linearGradient><linearGradient id="wmGreen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="213"><stop offset="0" stop-color="#86c108"/><stop offset=".5" stop-color="#4f9b0e"/><stop offset="1" stop-color="#13670f"/></linearGradient><linearGradient id="wmLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#16521e"/><stop offset="1" stop-color="#79b72b"/></linearGradient></defs></svg>
 
 <noscript>
   <div style="max-width:720px;margin:40px auto;padding:24px;font-family:sans-serif;line-height:1.6;color:#15212f;">
