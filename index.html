@@ -2196,22 +2196,13 @@ html body #heroSearchForm .sb-tools .map-btn span{font-size:3.2vw!important}
 }
 </style>
 <style id="introCss">
-#introSplash{position:fixed;inset:0;z-index:99999;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .5s ease}
-#introSplash.out{opacity:0;pointer-events:none}
-#introSplash img{width:min(86vw,520px);height:auto;display:block}
-@media (prefers-reduced-motion:reduce){#introSplash{display:none}}
-</style>
+@media (prefers-reduced-motion:reduce){</style>
+<style>.hero-logo-card .hero-intro{margin:-6px auto 0;line-height:0;text-align:center}.hero-logo-card .hero-intro img.hi{width:min(100%,380px)!important;height:auto!important;margin:0 auto!important;display:block}.hero-logo-card .hero-tagline-sm{margin-top:0!important}</style>
+<style>.hero-intro-m{display:none}.hero-logo-card .hero-tagline-sm{display:none!important}
+@media(max-width:700px){.hero-intro-m{display:block;background:#fff;border-radius:22px;overflow:hidden;width:min(54vw,230px);margin:2px auto 14px;padding:4px 6px;line-height:0;box-shadow:0 10px 26px -14px rgba(0,0,0,.55)}.hero-intro-m img{width:100%;height:auto;display:block}}
+@media(prefers-reduced-motion:reduce){.hero-intro-m img,.hero-intro img{content:url(logo.png)}}</style>
 </head>
-<body><div id="introSplash" aria-hidden="true"><img id="introImg" src="intro.webp" alt=""></div>
-<script>(function(){var el=document.getElementById('introSplash');if(!el)return;
-var seen=false;try{var t=+localStorage.getItem('nl_intro_t')||0;seen=(Date.now()-t)<86400000}catch(e){}
-function rm(){if(el.parentNode)el.parentNode.removeChild(el)}
-if(seen){rm();return}
-var t0=Date.now(),fin=false;
-function done(){if(fin)return;fin=true;try{localStorage.setItem('nl_intro_t',String(Date.now()))}catch(e){}el.classList.add('out');setTimeout(rm,500)}
-function ready(){var w=Math.max(0,1100-(Date.now()-t0));setTimeout(done,w)}
-if(document.readyState==='complete')ready();else window.addEventListener('load',ready);
-el.addEventListener('click',done);setTimeout(done,2200)})();</script><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="wmNavy" gradientUnits="userSpaceOnUse" x1="0" y1="-700" x2="0" y2="0"><stop offset="0" stop-color="#0059a3"/><stop offset=".55" stop-color="#00437c"/><stop offset="1" stop-color="#002b55"/></linearGradient><linearGradient id="wmGreen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="213"><stop offset="0" stop-color="#86c108"/><stop offset=".5" stop-color="#4f9b0e"/><stop offset="1" stop-color="#13670f"/></linearGradient><linearGradient id="wmLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#16521e"/><stop offset="1" stop-color="#79b72b"/></linearGradient></defs></svg>
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="wmNavy" gradientUnits="userSpaceOnUse" x1="0" y1="-700" x2="0" y2="0"><stop offset="0" stop-color="#0059a3"/><stop offset=".55" stop-color="#00437c"/><stop offset="1" stop-color="#002b55"/></linearGradient><linearGradient id="wmGreen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="213"><stop offset="0" stop-color="#86c108"/><stop offset=".5" stop-color="#4f9b0e"/><stop offset="1" stop-color="#13670f"/></linearGradient><linearGradient id="wmLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#16521e"/><stop offset="1" stop-color="#79b72b"/></linearGradient></defs></svg>
 
 <noscript>
   <div style="max-width:720px;margin:40px auto;padding:24px;font-family:sans-serif;line-height:1.6;color:#15212f;">
@@ -2301,6 +2292,7 @@ el.addEventListener('click',done);setTimeout(done,2200)})();</script><svg width=
   <div class="grid-overlay"></div>
   <div class="hero-inner">
     <div>
+      <div class="hero-intro-m"><img src="intro.webp" width="564" height="422" alt="Nilamlink" loading="lazy"></div>
       <h1 data-ta-html="&lt;span class=&quot;h1-one&quot;&gt;நிலம் வாங்க, விற்க&lt;/span&gt;&lt;br&gt;&lt;em&gt;நம்பிக்கையுடன் இணையுங்கள்&lt;/em&gt;" data-en-html="&lt;span class=&quot;h1-one&quot;&gt;Buy and sell land&lt;/span&gt;&lt;br&gt;&lt;em&gt;Join with confidence&lt;/em&gt;"><span class="h1-one">நிலம் வாங்க, விற்க</span><br><em>நம்பிக்கையுடன் இணையுங்கள்</em></h1>
       <p class="bl-tagline"><span class="gt-main"><span class="gt-a">Better Land,</span> <span class="gt-b"><i class="sp sp1">&#10022;</i>Brighter<i class="sp sp2">&#10022;</i></span> <span class="gt-c">Future</span></span></p>
       <p class="gold-tagline" style="padding:0 !important"><span class="gt-main" data-ta-html="வாங்குபவருக்கும் விற்பவருக்கும்&lt;br&gt;இடையே &lt;b class=&quot;hl&quot;&gt;இணைப்பாக&lt;/b&gt;, ஆவணம் முதல்&lt;br&gt;&lt;b class=&quot;hl&quot;&gt;பத்திரப்பதிவு வரை&lt;/b&gt; உடன் இருக்கிறோம்" data-en-html="As the &lt;b class=&quot;hl&quot;&gt;link&lt;/b&gt; between buyer and seller,&lt;br&gt;with you from documents &lt;b class=&quot;hl&quot;&gt;to registration&lt;/b&gt;">வாங்குபவருக்கும் விற்பவருக்கும்<br>இடையே <b class="hl">இணைப்பாக</b>, ஆவணம் முதல்<br><b class="hl">பத்திரப்பதிவு வரை</b> உடன் இருக்கிறோம்</span></p>
@@ -2333,8 +2325,7 @@ el.addEventListener('click',done);setTimeout(done,2200)})();</script><svg width=
       
     </div>
     <div class="hero-logo-card">
-      <div class="logo-glow"><img src="logo.png" alt="Nilamlink icon"></div>
-      <div class="hero-wordmark"><img class="wmi" src="wm_light.png" alt="Nilamlink"></div>
+      <div class="hero-intro"><img class="hi" src="intro.webp" width="564" height="422" alt="Nilamlink" loading="lazy"></div>
       <div class="hero-tagline-sm">LAND &middot; BUY &middot; SELL &middot; INVEST</div>
       <div class="stat-grid">
         <div class="stat-tap" role="button" tabindex="0" data-stat="listed"><b id="statListed">—</b><span data-ta="பதிவு செய்யப்பட்ட நிலங்கள்" data-en="Listed Properties">பதிவு செய்யப்பட்ட நிலங்கள்</span></div>
