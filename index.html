@@ -5146,11 +5146,22 @@ document.addEventListener('click',function(){setTimeout(function(){var o=documen
     setTimeout(function(){if(got)return;try{if('AbsoluteOrientationSensor' in window){var s=new AbsoluteOrientationSensor({frequency:30,referenceFrame:'screen'});
       s.addEventListener('reading',function(){var q=s.quaternion;if(!q)return;var h=Math.atan2(2*(q[0]*q[1]-q[2]*q[3]),1-2*(q[0]*q[0]+q[2]*q[2]))/D2R;if(h<0)h+=360;setH(h);});s.start();}}catch(e){}
       setTimeout(function(){if(!got)nt.textContent=lang()?'Compass sensor not available on this device':'இந்த சாதனத்தில் திசைகாட்டி சென்சார் கிடைக்கவில்லை';},1200);},1200);}
-  function openC(){el.classList.add('open');el.setAttribute('aria-hidden','false');
+  function openC(){el.classList.add('open');el.setAttribute('aria-hidden','false');setTimeout(playAnim,60);
     nt.textContent=lang()?'Hold the phone flat':'போனை தட்டையாகப் பிடியுங்கள்';
     var P=window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission;
     if(typeof P==='function'){try{DeviceOrientationEvent.requestPermission().then(function(r){if(r==='granted')start();else nt.textContent=lang()?'Permission denied':'அனுமதி மறுக்கப்பட்டது';}).catch(function(){});}catch(e){}}else start();}
-  function closeC(){el.classList.remove('open');el.setAttribute('aria-hidden','true');}
+  var pn=0,pov=null,ptm=null;
+  function stopAnim(){if(ptm){clearTimeout(ptm);ptm=null}if(pov){pov.remove();pov=null}var w=el.querySelector('.cmp-wm');if(w)w.style.visibility=''}
+  function playAnim(){stopAnim();if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    var w=el.querySelector('.cmp-wm'),cb=el.querySelector('.cb');if(!w||!cb)return;pn++;
+    var im=new Image();im.alt='';im.setAttribute('aria-hidden','true');
+    im.onload=function(){if(!el.classList.contains('open'))return;
+      var B=cb.getBoundingClientRect(),W=w.getBoundingClientRect(),sw=W.width/1500,s=1463*sw/754,vt=W.top+Math.max(0,(W.height-297*sw)/2);
+      im.style.cssText='position:absolute;pointer-events:none;max-width:none;border-radius:0;transition:opacity .35s ease;width:'+(834*s)+'px;height:'+(330*s)+'px;left:'+(W.left-B.left+27*sw-40*s)+'px;top:'+(vt-B.top+3*sw-132*s)+'px';
+      cb.appendChild(im);pov=im;w.style.visibility='hidden';
+      ptm=setTimeout(function(){w.style.visibility='';im.style.opacity=0;ptm=setTimeout(stopAnim,400)},3650)};
+    im.src='popup_rest.webp#'+pn}
+  function closeC(){el.classList.remove('open');el.setAttribute('aria-hidden','true');stopAnim();}
   el.addEventListener('click',function(e){if(e.target===el||e.target.classList.contains('cx'))closeC();});
   document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;
     var w=t.closest('img.wmi');if(!w)return;e.preventDefault();e.stopPropagation();openC();},true);
