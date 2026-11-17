@@ -2342,7 +2342,7 @@ html body #heroSearchForm .sb-tools .map-btn span{font-size:3.2vw!important}
 <div class="sb-after"><div class="wrap">
     <form class="searchbar" id="heroSearchForm">
       <div class="sb-title"><h2 data-ta="உங்களுக்கான சிறந்த நிலத்தை இங்கே தேடுங்கள்" data-en="Find the best land for you here">உங்களுக்கான சிறந்த நிலத்தை இங்கே தேடுங்கள்</h2></div>
-      <div class="dem-row sb-qrow"><label class="dem-sbox"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><input type="search" id="heroQ" class="dem-q" placeholder="இடம் / நில வகை" autocomplete="off"></label><button type="button" class="dem-fbtn" id="sbFilterBtn" aria-label="Filter" aria-expanded="false"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 5h16l-6.2 7.6v5.4l-3.6 1.8v-7.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></button></div>
+      <div class="dem-row sb-qrow"><label class="dem-sbox"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><input type="search" id="heroQ" class="dem-q" placeholder="இடம் / நில வகை" data-ta-ph="இடம் / நில வகை" data-en-ph="Area / land type" autocomplete="off"></label><button type="button" class="dem-fbtn" id="sbFilterBtn" aria-label="Filter" aria-expanded="false"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 5h16l-6.2 7.6v5.4l-3.6 1.8v-7.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></button></div>
       <div class="sb-filters" id="sbFilters">
       <div><label for="searchDistrict" data-ta="மாவட்டம்" data-en="District">மாவட்டம்</label><select id="searchDistrict"><option value="" data-ta="அனைத்தும்" data-en="All">அனைத்தும்</option></select></div>
       <div><label for="searchTaluk" data-ta="வட்டம்" data-en="Taluk">வட்டம்</label><select id="searchTaluk"><option value="" data-ta="அனைத்தும்" data-en="All">அனைத்தும்</option></select></div>
@@ -5126,7 +5126,7 @@ document.addEventListener('click',function(){setTimeout(function(){var o=documen
   var ndl=document.getElementById('nlNdl'),deg=document.getElementById('nlDeg'),dir=document.getElementById('nlDir'),nt=document.getElementById('nlNt');
   var isEn=function(){try{return (document.documentElement.lang||'').indexOf('en')===0||document.body.classList.contains('en')||/EN/.test('')}catch(e){return false}};
   var TA=['வடக்கு','வடகிழக்கு','கிழக்கு','தென்கிழக்கு','தெற்கு','தென்மேற்கு','மேற்கு','வடமேற்கு'],EN=['North','North-East','East','South-East','South','South-West','West','North-West'];
-  var lang=function(){var h=document.getElementById('heroQ');return (h&&/Place|Location/i.test(h.placeholder||''))?1:0;};
+  var lang=function(){var h=document.getElementById('heroQ');return (h&&/Place|Location|Area/i.test(h.placeholder||''))?1:0;};
   var got=false,cur=null,on=false;
   function setH(h){if(h==null||isNaN(h))return;got=true;
     if(cur==null)cur=h;else{var d=((h-cur+540)%360)-180;if(Math.abs(d)<1.5)return;cur=(cur+d*.4+360)%360;}
