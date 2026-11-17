@@ -5178,7 +5178,7 @@ document.addEventListener('click',function(){setTimeout(function(){var o=documen
 <style>@media(min-width:701px) and (max-width:1100px){html body div.hero-logo-card .stat-grid{display:grid!important}html body div.hero-logo-card .stat-grid>div:not(.stat-tap){display:none!important}html body div.hero-logo-card{padding:20px 18px 20px!important}}</style>
 <style>.hero h1 em{white-space:nowrap!important}</style>
 <script>(function(){var h=document.querySelector('.hero h1'),e=h&&h.querySelector('em');if(!e)return;
-function fit(){e.style.removeProperty('font-size');var base=parseFloat(getComputedStyle(e).fontSize)||40,t=base*.86;e.style.setProperty('font-size',t+'px','important');
+function fit(){e.style.removeProperty('font-size');var base=parseFloat(getComputedStyle(e).fontSize)||40,t=base*(window.innerWidth<700?.97:.86);e.style.setProperty('font-size',t+'px','important');
 var hr=h.getBoundingClientRect(),av=hr.width,c=document.querySelector('.hero-logo-card');
 if(c&&getComputedStyle(c).display!=='none'){var cr=c.getBoundingClientRect();if(cr.top<hr.bottom&&cr.bottom>hr.top&&cr.left>hr.left)av=Math.min(av,cr.left-hr.left-24)}
 var rg=document.createRange();rg.selectNodeContents(e);var w=rg.getBoundingClientRect().width;if(w>av&&w>0)e.style.setProperty('font-size',(t*av/w*.98)+'px','important')}
