@@ -5182,7 +5182,7 @@ function fit(){e.style.removeProperty('font-size');var base=parseFloat(getComput
 var hr=h.getBoundingClientRect(),av=hr.width,c=document.querySelector('.hero-logo-card');
 if(c&&getComputedStyle(c).display!=='none'){var cr=c.getBoundingClientRect();if(cr.top<hr.bottom&&cr.bottom>hr.top&&cr.left>hr.left)av=Math.min(av,cr.left-hr.left-24)}
 var rg=document.createRange();rg.selectNodeContents(e);var w=rg.getBoundingClientRect().width;if(w>av&&w>0)e.style.setProperty('font-size',(t*av/w*.98)+'px','important')}
-var tm;function sch(){clearTimeout(tm);tm=setTimeout(fit,60)}
+var tm;function sch(){if(tm)return;tm=requestAnimationFrame(function(){tm=0;fit()})}
 window.addEventListener('load',function(){fit();setTimeout(fit,600);setTimeout(fit,1800)});window.addEventListener('resize',sch);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 new MutationObserver(sch).observe(h,{childList:true,subtree:true,characterData:true});
